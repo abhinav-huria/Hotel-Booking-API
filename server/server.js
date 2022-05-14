@@ -11,6 +11,7 @@ import hotels from "./routes/hotels.js";
 // import { Hotels } from "./models/hotel_model";
 
 const app = express();
+app.use(express.json());
 dotenv.config();
 //DB CONNECTION
 const connectDB = async () => {
