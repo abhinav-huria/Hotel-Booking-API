@@ -5,6 +5,8 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import auth from "./routes/auth.js";
 import hotels from "./routes/hotels.js";
+import rooms from "./routes/rooms.js";
+import cookieParser from "cookie-parser";
 //import path from "path";
 // import { Customer } from "./models/customer_model";
 // import { Reservation } from "./models/reservation_model";
@@ -12,6 +14,7 @@ import hotels from "./routes/hotels.js";
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 dotenv.config();
 //DB CONNECTION
 const connectDB = async () => {
@@ -41,7 +44,7 @@ app.get("/", (req,res) => {
 
 app.use("/api/v1/auth",auth);
 app.use("/api/v1/hotels",hotels);
-
+app.use("/api/v1/rooms",rooms);
 
 app.listen(3003, () => {
     connectDB();

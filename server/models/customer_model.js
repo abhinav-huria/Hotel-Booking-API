@@ -1,39 +1,49 @@
-import { Schema, model } from "mongoose"
-import { genSalt, hash } from "bcrypt"
+import mongoose from 'mongoose';
+//import bcrypt from 'bcrypt';
+import { hash, genSalt } from 'bcrypt';
+import { checkLength } from '../controllers/validation.js';
 
-const customerSchema = new Schema(
+const userSchema = new mongoose.Schema(
     {
-        customerName:{
+        userFirstName:{
             type: String,
             required: true,
             unique: false
         },
-        customerEmail:{
+        userLastName:{
+            type: String,
+            required: true,
+            unique: false
+        },
+        userEmail:{
             type: String,
             required: true,
             unique: true
         },
-        customerPassword:{
+        userPassword:{
             type: String,
             required: true
         },
-        customerAddress:{
+        userPhoneNumber:{
             type: String,
-            min:8
-        },
-        customerPhoneNumber:{
-            type: String,
-            min:10,
-            max: 10,
             required: true,
-            unique: true
+            unique: true,
+            validate: checkLength(10)
         },
-        customerBookings:[{
-            type: Schema.Types.ObjectId,
-            ref: 'Reservation'
+        isAdmin:{
+            type: Boolean,
+            default: false
+        },
+        isHotelOwner:{
+            type: Boolean,
+            default: false
+        },
+        userBookings:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Booking'
         }],
-        customerReviews:[{
-            type: Schema.Types.ObjectId,
+        userReviews:[{
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Review'
         }]
        
@@ -42,15 +52,15 @@ const customerSchema = new Schema(
 )
 
 
-customerSchema.pre('save', async function (next){
+userSchema.pre('save', async function (next){
     try{
         const salt = await genSalt(10)
-        const hashedPassword = await hash(this.customerPassword, salt)
-        this.customerPassword = hashedPassword
+        const hashedPassword = await hash(this.userPassword, salt)
+        this.userPassword = hashedPassword
         next()
     }catch(error){
         next(error)
     }
 })
 
-export default model("Customer", customerSchema)
+export default mongoose.model("User", userSchema);

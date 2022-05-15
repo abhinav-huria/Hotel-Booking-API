@@ -42,3 +42,35 @@ export const updateHotel = async (req, res) => {
     }
     };
         
+export const deleteHotel = async (req, res) => {
+    try {
+        await Hotel.findByIdAndDelete(req.params.id);
+        res.status(200).json("Hotel has been deleted.");
+    } catch (error) {
+        res.status(500).json(error);
+    }
+    };
+
+    export const getHotelByName = async (req, res) => {
+        try {
+            const hotel = await Hotel.findOne({
+                hotelName: req.params.name
+            });
+            res.status(200).json(hotel);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+        };
+
+        export const getHotelByCity = async (req, res) => {
+            try {
+                const hotel = await Hotel.find({
+                    hotelCity: req.params.city
+                });
+                res.status(200).json(hotel);
+            } catch (error) {
+                res.status(500).json(error);
+            }
+            };
+
+            

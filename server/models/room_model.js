@@ -1,115 +1,62 @@
 import mongoose from "mongoose";
 
-
-const RoomSchema = new mongoose.Schema({
-
+const RoomSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
 
     description: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
-
-    images: [
-        {
-            image: String
-        }
-    ],
-
     pricePerNight: {
-        type: Number,
-        required: true,
-    },
-
-    address: {
-        type: String,
-        required: true,
+      type: Number,
+      required: true,
     },
 
     guestCapacity: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
 
     numOfBeds: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
-
+    bedType: {
+      type: String,
+      required: true,
+    },
     internet: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
 
     breakfast: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
 
     airConditioned: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
-
-    petsAllowed: {
-        type: Boolean,
-        default: false
+    hotelId: {
+      type: String,
+      required: true,
     },
-
-    roomCleaning: {
-        type: Boolean,
-        default: false
-    },
-
-    ratings: {
-        type: Number,
-        default: 0
-    },
-
-    numOfReviews: {
-        type: Number,
-        default: 0
-    },
-
-    category: {
-        type: String,
-        required: true,
-        enum: ['King', 'Single', 'Twins']
-    },
-
-    reviews: [
-        {
-            user: {
-                type: mongoose.Types.ObjectId,
-                ref: 'User',
-                required: true
-            },
-            name: {
-                type: String,
-                required: true,
-            },
-            rating: {
-                type: Number,
-                required: true
-            },
-            comment: {
-                type: String,
-                required: true
-            }
-        }
+    numberOfRooms: [
+      {
+        number: Number,
+        datesBooked: { type: [Date] },
+      },
     ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-    user: {
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-
-}, {
-    timestamps: true
-});
-
-export default model("Room", RoomSchema)
+export default mongoose.model("Room", RoomSchema);
