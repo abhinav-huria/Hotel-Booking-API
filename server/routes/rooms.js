@@ -8,7 +8,7 @@ router.post('/addRoom/:hotelId',verifyHotelOwner, addRoom);
 router.get('/getRooms/:hotelId', getRoomsByHotel);
 router.get('/getRoom/:id', verifyUser, getRoom);
 router.put('/updateRoom/:id', verifyHotelOwner, updateRoom);
-router.delete('/deleteRoom/:id',verifyHotelOwner, deleteRoom);
+router.delete('/deleteRoom/:hotelId/:roomId',verifyHotelOwner, deleteRoom);
 router.put('/roomAvailability/:id',verifyUser, roomAvailability);
 
 export default router;

@@ -5,12 +5,7 @@ import { checkLength } from '../controllers/validation.js';
 
 const userSchema = new mongoose.Schema(
     {
-        userFirstName:{
-            type: String,
-            required: true,
-            unique: false
-        },
-        userLastName:{
+        userName:{
             type: String,
             required: true,
             unique: false

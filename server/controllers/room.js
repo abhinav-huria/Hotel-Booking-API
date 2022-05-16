@@ -56,10 +56,10 @@ export const updateRoom = async (req, res) => {
 export const deleteRoom = async (req, res) => {
   const hotelId = req.params.hotelId;
   try {
-    await Room.findByIdAndDelete(req.params.id);
+    await Room.findByIdAndDelete(req.params.roomId);
     try {
       await Hotel.findByIdAndUpdate(hotelId, {
-        $pull: { hotelRooms: req.params.id },
+        $pull: { hotelRooms: req.params.roomId },
       });
     } catch (err) {
       return res.status(500).json({
