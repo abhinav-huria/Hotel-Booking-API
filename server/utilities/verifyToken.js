@@ -36,7 +36,7 @@ export const verifyUser = (req, res, next) => {
       next();
     } else {
       return res.status(403).json({
-        message: "You are not authorized to perform this action",
+        message: "You are not authorized to perform this action. Please try again",
       });
     }
   });
