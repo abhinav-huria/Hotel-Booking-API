@@ -1,10 +1,10 @@
 import express from "express";
-import { verifyAdmin } from "../utilities/verifyToken";
-
+import { verifyAdmin,verifyUser } from "../utilities/verifyToken.js";
+import { getBooking,getBookings,bookRoom, deleteBooking } from "../controllers/booking.js";
 const router = express.Router();
 
 router.get("/getAllBookings",verifyAdmin, getBookings);
-router.get("/:userId/:bookingId",verifyUser, getBooking);
+router.get("/:bookingId",verifyUser, getBooking);
 router.post("/book/:userId/:roomId",verifyUser, bookRoom);
 router.delete("/:userId/:bookingId",verifyUser, deleteBooking);
 

@@ -1,7 +1,7 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
+// import { LockClosedIcon } from "@heroicons/react/solid";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 export default function Register() {

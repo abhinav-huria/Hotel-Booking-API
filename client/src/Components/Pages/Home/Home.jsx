@@ -1,14 +1,13 @@
+import BookingComponent from "../../common/Bookingcomponent/BookingComponent";
 const Home = () => {
     return (
         <>
             {/* <Navbar /> */}
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <h1>Home</h1>
-                    </div>
-                </div>
-            </div>
+           <div className="outer-cont">
+                 <div className="inner-cont">
+                 <BookingComponent/>
+                 </div>
+                 </div>      
         </>
     );
     }

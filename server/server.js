@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 import auth from "./routes/auth.js";
 import hotels from "./routes/hotels.js";
 import rooms from "./routes/rooms.js";
+import booking from "./routes/booking.js";
+import users from "./routes/users.js";
 import cookieParser from "cookie-parser";
 //import path from "path";
 // import { Customer } from "./models/customer_model";
@@ -46,7 +48,8 @@ app.get("/", (req,res) => {
 app.use("/api/v1/auth",auth);
 app.use("/api/v1/hotels",hotels);
 app.use("/api/v1/rooms",rooms);
-
+app.use("/api/v1/booking",booking);
+app.use("/api/v1/users",users);
 app.listen(3003, () => {
     connectDB();
     console.log(`Listening at http://localhost:3003`);

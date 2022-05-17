@@ -33,9 +33,9 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false
         },
-        userBookings:[{
+userBookings:{
             type: [String]
-        }],
+},
     },
     { timestamps: true }
 )

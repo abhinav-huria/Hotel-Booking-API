@@ -1,0 +1,44 @@
+.cont-booking-form{
+    display: flex;
+    max-width: 80vw;
+}
+.inner-cont-booking-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 80vw;
+    margin: 0 auto;
+    gap: 1vw;
+}
+.select-city{
+    max-width: 30vw;
+    margin-right: 1vw;
+}
+
+.date-picker{
+    
+    margin-right: 1vw;
+}
+.guest-select{
+    max-width: 10vw;
+    margin-right: 1vw;
+}
+.btn-booking{
+    
+    max-width: 10vw;
+}
+
+@media (max-width:730px) {
+    
+    .inner-cont-booking-form{
+        flex-direction: column;
+        gap: 2vh;
+        max-width: 50vw;
+    }
+    .btn-booking{
+       
+        width: 100%;
+    }
+   
+}
