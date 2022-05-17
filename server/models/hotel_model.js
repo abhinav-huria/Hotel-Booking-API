@@ -35,18 +35,11 @@ const HotelSchema = new mongoose.Schema({
     required: true,
   },
   hotelAmenities: {
-    type: [String],
+    type: [String], 
     required: false,
   },
-  hotelRooms: {
-    type:[String],
-  },
-  hotelReviews: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Review",
-    },
-  ],
+  hotelRooms: [{ room: String, numberOfRooms: Number, roomId: String }],
+ 
 });
 
 export default mongoose.model("Hotel", HotelSchema);

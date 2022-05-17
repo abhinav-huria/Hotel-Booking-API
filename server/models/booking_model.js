@@ -1,16 +1,15 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
-
-const bookingSchema = new Schema({
+const bookingSchema = new mongoose.Schema({
   endAt: { type: Date, required: "Ending Date is required!" },
   startAt: { type: Date, required: "Start Date is required!" },
   totalPrice: Number,
-  days: Number,
+roomId:{
+    type: String,
+},
   guests: Number,
   createdAt: { type: Date, default: Date.now },
-  user: { type: Schema.Types.ObjectId, ref: "User" },
-  rental: { type: Schema.Types.ObjectId, ref: "Rental" },
+  user: { userId: String },
 });
 
-module.exports = mongoose.model("Booking", bookingSchema);
+export default model("Booking", bookingSchema);

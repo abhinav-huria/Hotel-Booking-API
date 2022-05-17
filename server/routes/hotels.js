@@ -6,7 +6,8 @@ import {
   updateHotel,
   deleteHotel,
   getHotelByName,
-  getHotelByCity
+  getHotelByCity,
+  getCities
 } from "../controllers/hotel.js";
 import { verifyAdmin, verifyHotelOwner } from "../utilities/verifyToken.js";
 
@@ -19,4 +20,5 @@ router.get("/city/:city", getHotelByCity);
 router.post("/", verifyAdmin, addHotel);
 router.put("/:id",verifyHotelOwner, updateHotel);
 router.delete("/:id", verifyHotelOwner, deleteHotel);
+router.get("/availableCities/c", getCities);
 export default router;

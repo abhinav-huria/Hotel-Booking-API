@@ -34,14 +34,8 @@ const userSchema = new mongoose.Schema(
             default: false
         },
         userBookings:[{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Booking'
+            type: [String]
         }],
-        userReviews:[{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Review'
-        }]
-       
     },
     { timestamps: true }
 )

@@ -21,10 +21,6 @@ const RoomSchema = new mongoose.Schema(
       required: true,
     },
 
-    numOfBeds: {
-      type: Number,
-      required: true,
-    },
     bedType: {
       type: String,
       required: true,
@@ -50,7 +46,7 @@ const RoomSchema = new mongoose.Schema(
     numberOfRooms: [
       {
         number: Number,
-        datesBooked: { type: [Date] },
+        datesBooked: { type: [Date] }, 
       },
     ],
   },

@@ -73,4 +73,11 @@ export const deleteHotel = async (req, res) => {
             }
             };
 
-            
+            export const getCities = async (req, res) => {
+                try {
+                    const cities = await Hotel.distinct("hotelCity");
+                    res.status(200).json(cities);
+                } catch (error) {
+                    res.status(500).json(error);
+                }
+                };
