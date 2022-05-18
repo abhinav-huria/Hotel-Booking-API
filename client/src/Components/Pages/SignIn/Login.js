@@ -4,21 +4,29 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { signIn} from "../../API/Auth.js";
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPWD] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  });
+ 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user, 
+      [name]: value,
+    });
+  };
+
   // const navigate = useNavigate();
-  function onEChange(e) {
-    setEmail(e.target.value);
-  }
-  function onPChange(e) {
-    setPWD(e.target.value);
-  }
+ 
 
   async function handleSubmit(event) {
     event.preventDefault();
     localStorage.clear();
-    alert(email);
+    signIn(user).then(result => { alert(result.data)});
+    
     // await axios
     //   .post("/api/login", { email, password })
     //   .then((result) => {
@@ -48,8 +56,9 @@ export default function Login() {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              value={email}
-              onChange={onEChange}
+              value={user.email}
+              onChange={handleChange}
+              name="email"
             />
           </Form.Group>
 
@@ -58,8 +67,9 @@ export default function Login() {
             <Form.Control
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={onPChange}
+              value={user.password}
+              onChange={handleChange}
+              name="password"
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">

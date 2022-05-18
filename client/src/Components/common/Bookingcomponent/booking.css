@@ -1,32 +1,34 @@
 .cont-booking-form{
     display: flex;
-    max-width: 80vw;
+    width: 100%;
 }
 .inner-cont-booking-form{
+    
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 80vw;
+   padding: 10px;
     margin: 0 auto;
-    gap: 1vw;
+   gap:4%;
 }
 .select-city{
-    max-width: 30vw;
-    margin-right: 1vw;
+    width: 30%;
+   
 }
 
 .date-picker{
-    
-    margin-right: 1vw;
+    width: 30%;
+   border-radius: 10px;
 }
 .guest-select{
-    max-width: 10vw;
-    margin-right: 1vw;
+    width: 10%;
+    
 }
 .btn-booking{
-    
-    max-width: 10vw;
+    color: rgb(146, 0, 243);;
+    background-color: rgb(146, 0, 243);
+   width: 10%;
 }
 
 @media (max-width:730px) {

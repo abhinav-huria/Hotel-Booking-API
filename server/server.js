@@ -17,8 +17,13 @@ import cookieParser from "cookie-parser";
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+
 dotenv.config();
+var corsProperties={
+    credentials: true,
+    origin: ['http://localhost:3000'] 
+ };
+ app.use(cors(corsProperties));
 //DB CONNECTION
 const connectDB = async () => {
     try {

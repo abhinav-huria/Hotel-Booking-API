@@ -4,6 +4,8 @@ import React, { useState } from "react";
 // import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { signUp } from "../../API/Auth.js";
+import Login from "./Login.js";
 export default function Register() {
   const [user, setUser] = useState({
     userName: "",
@@ -23,7 +25,7 @@ export default function Register() {
   async function handleSubmit(event) {
     event.preventDefault();
     localStorage.clear();
-    alert(user.userEmail);
+    signUp(user);
     // await axios
     //   .post("/api/login", { email, password })
     //   .then((result) => {
@@ -94,7 +96,7 @@ export default function Register() {
       </Form>
       </div>
 
-
+<Login/>
         
     </>
   );
