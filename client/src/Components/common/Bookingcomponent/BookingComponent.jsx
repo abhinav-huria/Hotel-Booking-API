@@ -1,4 +1,4 @@
-import { useState, useEffect ,useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { Form, Button } from "react-bootstrap";
 import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
@@ -8,46 +8,52 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { searchContext } from "../../Context/search.js";
 import { getAvailableCities } from "../../API/Hotel";
-const BookingComponent = (props) => {
+const BookingComponent = () => {
   const [city, setCity] = useState("");
   const [guests, setGuests] = useState(0);
   const [date, setDate] = useState([new Date(), new Date()]);
   const [cities, setCities] = useState([]);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
 
-//   const handleDateChange = () => {
-//     alert(guests);
-//   };
+  //   const handleDateChange = () => {
+  //     alert(guests);
+  //   };
 
- const { dispatch } = useContext(searchContext);
+  const { dispatch } = useContext(searchContext);
   //const {state, dispatch} = useContext(searchContext)
   const handleSearch = () => {
-      if(guests>0 && date[0]!==null && date[1]!==null && city!=="def" && city!=="") {
-   dispatch({ type: "NEW_SEARCH", payload: { city, date, guests } });
-   navigate(`/hotels`, { state: { city, date, guests } });
-      }
-      else
-      {
-        alert("Please fill all the fields");
-      }
+    if (
+      guests > 0 &&
+      date[0] !== null &&
+      date[1] !== null &&
+      city !== "def" &&
+      city !== ""
+    ) {
+      dispatch({ type: "NEW_SEARCH", payload: { city, date, guests } });
+      navigate(`/hotels`, { state: { city, date, guests } });
+    } else {
+      alert("Please fill all the fields");
+    }
   };
 
   useEffect(() => {
-getAvailableCities().then((res) => {
-  setCities(res.data);
-}).catch((err) => {
-  console.log(err);
-});
+    getAvailableCities()
+      .then((res) => {
+        setCities(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
     <>
       <div className="cont-booking-form">
         <div className="inner-cont-booking-form">
-        {/* <Form onSubmit={(e)=>handleSearch(e,dispatch)}> */}
+          {/* <Form onSubmit={(e)=>handleSearch(e,dispatch)}> */}
           <Form.Select
             onChange={handleCityChange}
             className="select-city"
@@ -94,17 +100,12 @@ getAvailableCities().then((res) => {
               4(Max)
             </option>
           </Form.Select>
-          <Button
-            type="button"
-            className="btn-booking"
-            onClick={handleSearch}
-          >
+          <Button type="button" className="btn-booking" onClick={handleSearch}>
             Submit
           </Button>
-         
+
           {/* <button type="button" className="btn-booking" onClick={handleDateChange}>Submit</button> */}
         </div>
-
       </div>
       {/* <button onClick={() => props.handleBooking(city, date)}>Book</button> */}
     </>

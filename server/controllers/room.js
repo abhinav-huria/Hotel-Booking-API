@@ -24,7 +24,9 @@ export const addRoom = async (req, res) => {
 
 export const getRoomsByHotel = async (req, res) => {
   try {
+    console.log(req.params.hotelId);
     const rooms = await Room.find({ hotelId: req.params.hotelId });
+    console.log(rooms);
     res.status(200).json(rooms);
   } catch (error) {
     res.status(500).json(error);
@@ -89,5 +91,14 @@ export const roomAvailability = async (req, res) => {
     res.status(500).json({
       message: err.message,
     });
+  }
+};
+
+export const getAllRooms = async (req, res) => {
+  try {
+    const rooms = await Room.find();
+    res.status(200).json(rooms);
+  } catch (error) {
+    res.status(500).json(error);
   }
 };

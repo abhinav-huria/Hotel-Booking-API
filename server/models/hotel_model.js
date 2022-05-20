@@ -42,7 +42,10 @@ const HotelSchema = new mongoose.Schema({
     type: [String], 
     required: false,
   },
-  hotelRooms: [{ room: String, numberOfRooms: Number, roomId: String }],
+  hotelRooms: {
+    type: [String],
+    required: false,
+  },
  
 });
 
