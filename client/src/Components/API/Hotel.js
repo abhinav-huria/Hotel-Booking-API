@@ -7,13 +7,13 @@ export const getHotels = async () => {
 };
 
 export const getHotel = async (id) => {
-  const result = await axios.get(`http://localhost:3003/api/v1/${id}`);
+  const result = await axios.get(`http://localhost:3003/api/v1/hotels/${id}`);
 
   return result;
 };
 
 export const addHotel = async (hotel) => {
-  const result = await axios.post("http://localhost:3003/api/v1/addhotel", {
+  const result = await axios.post("http://localhost:3003/api/v1/hotels/addhotel", {
     hotelName: hotel.hotelName,
     hotelCity: hotel.hotelCity,
     hotelAddress: hotel.hotelAddress,
@@ -28,7 +28,7 @@ export const addHotel = async (hotel) => {
 };
 
 export const updateHotel = async (hotel, id) => {
-  const result = await axios.put(`http://localhost:3003/api/v1/update/${id}`, {
+  const result = await axios.put(`http://localhost:3003/api/v1/hotels/update/${id}`, {
    hotel
   });
 
@@ -37,21 +37,21 @@ export const updateHotel = async (hotel, id) => {
 
 export const deleteHotel = async (id) => {
   const result = await axios.delete(
-    `http://localhost:3003/api/v1/delete/${id}`
+    `http://localhost:3003/api/v1/hotels/delete/${id}`
   );
 
   return result;
 };
 
 export const getHotelByCity = async (city) => {
-  const result = await axios.get(`http://localhost:3003/api/v1/city/${city}`);
+  const result = await axios.get(`http://localhost:3003/api/v1/hotels/city/${city}`);
 
   return result;
 };
 
 export const getAvailableCities = async () => {
   const result = await axios.get(
-    `http://localhost:3003/api/v1/availableCities/c`
+    `http://localhost:3003/api/v1/hotels/availableCities/c`
   );
 
   return result;

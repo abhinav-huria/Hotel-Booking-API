@@ -241,3 +241,64 @@ const NavbarComponent = () => {
     };
 
     export default NavbarComponent;
+
+
+//Search
+
+   const [hotels,setHotels]=useState([]);
+    const [loading,setLoading]=useState(false);
+    const [error,setError]=useState(null);
+    const [page,setPage]=useState(1);
+    const [totalPages,setTotalPages]=useState(1);
+    const [searchTerm,setSearchTerm]=useState("");
+    const [searchLocation,setSearchLocation]=useState("");
+    const [searchPrice,setSearchPrice]=useState("");
+    const [searchRooms,setSearchRooms]=useState("");
+    const [searchRating,setSearchRating]=useState("");
+    const [searchType,setSearchType]=useState("");
+    const [searchSort,setSearchSort]=useState("");
+    const [searchFilter,setSearchFilter]=useState("");
+    const [searchFilterValue,setSearchFilterValue]=useState("");
+    const [searchFilterValue2,setSearchFilterValue2]=useState("");
+    const [searchFilterValue3,setSearchFilterValue3]=useState("");
+    const [searchFilterValue4,setSearchFilterValue4]=useState("");
+    const [searchFilterValue5,setSearchFilterValue5]=useState("");
+    const [searchFilterValue6,setSearchFilterValue6]=useState("");
+    const [searchFilterValue7,setSearchFilterValue7]=useState("");
+    const [searchFilterValue8,setSearchFilterValue8]=useState("");
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setSearch({
+            ...search,
+            [name]: value,
+        });
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setLoading(true);
+        setError(null);
+        setHotels([]);
+        getHotels(searchTerm,searchLocation,searchPrice,searchRooms,searchRating,searchType,searchSort,searchFilter,searchFilterValue,searchFilterValue2,searchFilterValue3,searchFilterValue4,searchFilterValue5,searchFilterValue6,searchFilterValue7,searchFilterValue8)
+        .then(res => {
+            if (res.status === 200) {
+                setHotels(res.data.hotels);
+                setTotalPages(res.data.totalPages);
+                setLoading(false);
+            }
+            else{
+                setError(res.response.data._message);
+                setLoading(false);
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            setError(error);
+            setLoading(false);
+        });
+    }
+
+    const getHotels = (searchTerm,searchLocation,searchPrice,searchRooms,searchRating,searchType,searchSort,searchFilter,searchFilterValue,searchFilterValue2,searchFilterValue3,searchFilterValue4,searchFilterValue5,searchFilterValue6,searchFilterValue7,searchFilterValue8) => {
+        return axios.get(`/api/hotels/search?searchTerm=${searchTerm}&searchLocation=${searchLocation}&searchPrice=${searchPrice}&searchRooms=${searchRooms}&searchRating=${searchRating}&searchType=${searchType}&searchSort=${searchSort}&searchFilter=${searchFilter}&searchFilterValue=${searchFilterValue}&searchFilterValue2=${searchFilterValue2}&searchFilterValue3=${searchFilterValue3}&searchFilterValue4=${searchFilterValue4}&searchFilterValue5=${searchFilterValue5}&searchFilterValue6=${searchFilterValue6}&searchFilterValue7=${searchFilterValue7}&searchFilterValue8=${searchFilterValue8}&page=${page}`);
+    }

@@ -1,51 +1,49 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { signIn} from "../../API/Auth.js";
+import { signIn } from "../../API/Auth.js";
+import { useContext, useState } from "react";
+import { authContext } from "../../Context/authContext.js";
+import queryString from "query-string";
 export default function Login() {
   const [user, setUser] = useState({
     email: "",
-    password: ""
+    password: "",
   });
- 
+  const location = useLocation();
+  const { error, dispatch } = useContext(authContext);
+  const navigate = useNavigate();
+const [err, setErr] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({
-      ...user, 
+      ...user,
       [name]: value,
     });
   };
-
-  // const navigate = useNavigate();
- 
-
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    localStorage.clear();
-    signIn(user).then(result => { alert(result.data)});
-    
-    // await axios
-    //   .post("/api/login", { email, password })
-    //   .then((result) => {
-    //     if (result.status === 200 && result.data.passed === true) {
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const response = await signIn(user);
+      if(response.status === 200){
+      dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
 
-    //       localStorage.setItem("isAuthenticated", "true");
-    //       navigate("/dashboard");
-    //       return Promise.resolve("Dummy response to keep the console quiet");
-    //     } else {
-    //       alert("Invalid Credentials");
-
-    //     }
-    //     return Promise.resolve("Dummy response to keep the console quiet");
-    //   })
-    //   .catch((error) => {
-
-    //     alert("Something went wrong");
-    //   });
-  }
+      const { redirectTo } = queryString.parse(location.search);
+      console.log(response.token);
+     navigate(redirectTo == null ? "/" : redirectTo);
+      }
+      else
+      {
+        setErr("Invalid Credentials");
+        dispatch({ type: "LOGIN_FAILURE", payload: response.data });
+      }
+    } catch (error) {
+      dispatch({ type: "LOGIN_FAILURE", payload: error.response });
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -78,7 +76,9 @@ export default function Login() {
           <Button variant="primary" type="submit">
             Submit
           </Button>
+          {err? <p>{err}</p> : null}
         </Form>
+        <Link to="/signup">Don't have an account yet?</Link>
       </div>
     </>
   );

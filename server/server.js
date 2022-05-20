@@ -24,6 +24,7 @@ var corsProperties={
     origin: ['http://localhost:3000'] 
  };
  app.use(cors(corsProperties));
+//  app.use(cors());
 //DB CONNECTION
 const connectDB = async () => {
     try {

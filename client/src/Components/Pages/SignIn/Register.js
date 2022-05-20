@@ -1,7 +1,5 @@
-// import { LockClosedIcon } from "@heroicons/react/solid";
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
+ import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { signUp } from "../../API/Auth.js";
@@ -13,7 +11,8 @@ export default function Register() {
     userPassword: "",
     userPhoneNumber: ""
   });
-
+  const [error, setError] = useState("");
+const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({
@@ -25,30 +24,25 @@ export default function Register() {
   async function handleSubmit(event) {
     event.preventDefault();
     localStorage.clear();
-    signUp(user);
-    // await axios
-    //   .post("/api/login", { email, password })
-    //   .then((result) => {
-    //     if (result.status === 200 && result.data.passed === true) {
-
-    //       localStorage.setItem("isAuthenticated", "true");
-    //       navigate("/dashboard");
-    //       return Promise.resolve("Dummy response to keep the console quiet");
-    //     } else {
-    //       alert("Invalid Credentials");
-
-    //     }
-    //     return Promise.resolve("Dummy response to keep the console quiet");
-    //   })
-    //   .catch((error) => {
-
-    //     alert("Something went wrong");
-    //   });
+    signUp(user).then((res) => {
+      if (res.status === 201) {
+  navigate("/login")
+      }
+      else{
+        console.log(res.response.data._message);
+        setError(res.response.data._message);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+     // setError(error);
+    });
   }
 
   return (
     <>
       <div className="container">
+      {error? <div className="alert alert-danger">{error}</div>:null}
         <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="userNhgame">
           <Form.Label>Name</Form.Label>
@@ -96,7 +90,6 @@ export default function Register() {
       </Form>
       </div>
 
-<Login/>
         
     </>
   );

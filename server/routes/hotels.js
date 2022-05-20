@@ -17,7 +17,7 @@ router.get("/", getHotels);
 router.get("/:id", getHotel);
 router.get("/name/:name", getHotelByName);
 router.get("/city/:city", getHotelByCity);
-router.post("/addhotel", verifyAdmin, addHotel);
+router.post("/addhotel", addHotel);
 router.put("/update/:id",verifyHotelOwner, updateHotel);
 router.delete("/delete/:id", verifyHotelOwner, deleteHotel);
 router.get("/availableCities/c", getCities);

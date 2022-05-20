@@ -6,46 +6,54 @@ import "react-calendar/dist/Calendar.css";
 import "./booking.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { searchContext } from "../../../../context/searchContext.js";
+import { searchContext } from "../../Context/search.js";
+import { getAvailableCities } from "../../API/Hotel";
 const BookingComponent = (props) => {
-  const [city, setCity] = useState("Chandigarh");
-  const [guests, setGuests] = useState(1);
+  const [city, setCity] = useState("");
+  const [guests, setGuests] = useState(0);
   const [date, setDate] = useState([new Date(), new Date()]);
   const [cities, setCities] = useState([]);
-
+const navigate = useNavigate();
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
 
-  const handleDateChange = () => {
-    alert(guests);
-  };
+//   const handleDateChange = () => {
+//     alert(guests);
+//   };
 
-  const { dispatch } = useContext(searchContext);
-
+ const { dispatch } = useContext(searchContext);
+  //const {state, dispatch} = useContext(searchContext)
   const handleSearch = () => {
-    dispatch({ type: "NEW_SEARCH", payload: { city, date, guests } });
-    navigate(`/hotels`, { state: { city, date, guests } });
+      if(guests>0 && date[0]!==null && date[1]!==null && city!=="def" && city!=="") {
+   dispatch({ type: "NEW_SEARCH", payload: { city, date, guests } });
+   navigate(`/hotels`, { state: { city, date, guests } });
+      }
+      else
+      {
+        alert("Please fill all the fields");
+      }
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3003/api/v1/hotels/availableCities/c")
-      .then((res) => {
-        setCities(res.data);
-      });
+getAvailableCities().then((res) => {
+  setCities(res.data);
+}).catch((err) => {
+  console.log(err);
+});
   }, []);
 
   return (
     <>
       <div className="cont-booking-form">
         <div className="inner-cont-booking-form">
+        {/* <Form onSubmit={(e)=>handleSearch(e,dispatch)}> */}
           <Form.Select
             onChange={handleCityChange}
             className="select-city"
             aria-label="Default select"
           >
-            <option value={0} key={0}>
+            <option value="def" key={-1}>
               Please select city
             </option>
             {cities.map((city) => (
@@ -92,9 +100,11 @@ const BookingComponent = (props) => {
             onClick={handleSearch}
           >
             Submit
-          </Button>{" "}
+          </Button>
+         
           {/* <button type="button" className="btn-booking" onClick={handleDateChange}>Submit</button> */}
         </div>
+
       </div>
       {/* <button onClick={() => props.handleBooking(city, date)}>Book</button> */}
     </>
