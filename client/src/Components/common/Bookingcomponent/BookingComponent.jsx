@@ -11,7 +11,7 @@ import { getAvailableCities } from "../../API/Hotel";
 const BookingComponent = () => {
   const [city, setCity] = useState("");
   const [guests, setGuests] = useState(0);
-  const [date, setDate] = useState([new Date(), new Date()]);
+  const [dates, setDates] = useState([ new Date(), new Date() ]);
   const [cities, setCities] = useState([]);
   const navigate = useNavigate();
   const handleCityChange = (e) => {
@@ -27,13 +27,17 @@ const BookingComponent = () => {
   const handleSearch = () => {
     if (
       guests > 0 &&
-      date[0] !== null &&
-      date[1] !== null &&
+      dates[0]!== null &&
+      dates[1] !== null &&
       city !== "def" &&
       city !== ""
     ) {
-      dispatch({ type: "NEW_SEARCH", payload: { city, date, guests } });
-      navigate(`/hotels`, { state: { city, date, guests } });
+      dispatch({ type: "NEW_SEARCH", payload: { city, dates, guests } });
+    
+      localStorage.setItem("checkin", dates[0].getTime());
+      localStorage.setItem("checkout", dates[1].getTime());
+      localStorage.setItem("guests", guests);
+      navigate(`/hotels`, { state: { city, dates, guests } });
     } else {
       alert("Please fill all the fields");
     }
@@ -73,9 +77,10 @@ const BookingComponent = () => {
   <option value="3">Three</option> */}
           </Form.Select>
           <DateRangePicker
+          
+                    onChange={setDates}
+                    value={dates}
             className="date-picker"
-            onChange={setDate}
-            value={date}
             minDate={new Date()}
             maxDate={new Date(2022, 12, 31)}
           />
