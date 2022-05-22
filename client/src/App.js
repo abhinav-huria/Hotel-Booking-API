@@ -8,6 +8,7 @@ import NavbarComponent from './Components/common/Navbar/Navbar';
 import Hotels from './Components/common/Hotel/Hotels';
 import Hotel from './Components/common/Hotel/Hotel';
 import Book from './Components/common/Book/Book';
+import Booking from './Components/common/Book/Booking';
 function App() {
 
   return (
@@ -22,6 +23,7 @@ function App() {
        <Route path="/hotels" element={<Hotels />} />
        <Route path="/viewhotel" element={<Hotel />} />
        <Route path="/bookRoom" element={<Book />} />
+       <Route path="/booking/:id" element={<Booking />} />
       {/* <Route path="/about" element={<About />} /> 
       <Route path="/hotels/:city/:" element={<Hotels />} />
    <Route path="/hotels/view/:id" element={<HotelDetails />} /> */}

@@ -9,11 +9,11 @@ import {
   getHotelByCity,
   getCities
 } from "../controllers/hotel.js";
-import { verifyAdmin, verifyHotelOwner } from "../utilities/verifyToken.js";
+import { verifyAdmin, verifyHotelOwner, verifyUser } from "../utilities/verifyToken.js";
 
 const router = express.Router();
 
-router.get("/", getHotels);
+router.get("/",verifyUser, getHotels);
 router.get("/:id", getHotel);
 router.get("/name/:name", getHotelByName);
 router.get("/city/:city", getHotelByCity);

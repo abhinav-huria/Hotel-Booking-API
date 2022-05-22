@@ -29,7 +29,7 @@ export const signIn = async (req, res) => {
         }
         const token = jwt.sign({id: user._id,isAdmin:user.isAdmin,isHotelOwner:user.isHotelOwner}, process.env.JWT_SECRET);
        // const {userPassword,userPhoneNumber,userEmail,userBookings,...other} = user._doc;
-        res.cookie('token', token, { httpOnly: false }).status(200).send(user._id);
+        res.cookie('token', token).status(200).json({user:user._id,token:token});
     } catch (error) {
         res.status(500).json(error);
     }

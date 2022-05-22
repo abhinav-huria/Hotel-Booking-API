@@ -27,11 +27,13 @@ const [err, setErr] = useState("");
     dispatch({ type: "LOGIN_START" });
     try {
       const response = await signIn(user);
+      console.log(response);
       if(response.status === 200){
-      dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
-
+      dispatch({ type: "LOGIN_SUCCESS", payload: response.data.user });
+localStorage.setItem("token", response.data.token);
+console.log(response.data.token);
       const { redirectTo } = queryString.parse(location.search);
-      console.log(response.token);
+      
      navigate(redirectTo == null ? "/" : redirectTo);
       }
       else

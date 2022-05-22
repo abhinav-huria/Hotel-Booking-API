@@ -10,6 +10,7 @@ roomId:{
   guests: Number,
   createdAt: { type: Date, default: Date.now },
   userId:  String ,
+  hotelId: String
 });
 
 export default mongoose.model("Booking", bookingSchema);

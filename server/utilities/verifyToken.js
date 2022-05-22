@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const verifyToken = (req, res, next) => {
+  
   const token = req.cookies.token;
   if (!token) {
     return res.status(401).json({
@@ -8,7 +9,8 @@ export const verifyToken = (req, res, next) => {
     });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(token);
+    const decoded =  jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
@@ -32,7 +34,7 @@ export const verifyAdmin = (req, res, next) => {
 
 export const verifyUser = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user.isAdmin || req.user.id === req.params.id) {
+    if (req.user.isAdmin || req.user.id === req.params.userId) {
       next();
     } else {
       return res.status(403).json({

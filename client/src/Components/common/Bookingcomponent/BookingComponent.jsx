@@ -9,15 +9,16 @@ import { useNavigate } from "react-router-dom";
 import { searchContext } from "../../Context/search.js";
 import { getAvailableCities } from "../../API/Hotel";
 const BookingComponent = () => {
+  const today = new Date();
   const [city, setCity] = useState("");
   const [guests, setGuests] = useState(0);
-  const [dates, setDates] = useState([ new Date(), new Date() ]);
+  const [dates, setDates] = useState([ new Date(), new Date(today.getTime() + (24 * 60 * 60 * 1000)) ]);
   const [cities, setCities] = useState([]);
   const navigate = useNavigate();
   const handleCityChange = (e) => {
     setCity(e.target.value);
   };
-
+//
   //   const handleDateChange = () => {
   //     alert(guests);
   //   };
