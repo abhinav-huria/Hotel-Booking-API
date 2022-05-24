@@ -9,6 +9,8 @@ import rooms from "./routes/rooms.js";
 import booking from "./routes/booking.js";
 import users from "./routes/users.js";
 import cookieParser from "cookie-parser";
+import {redisClient } from "./utilities/redis.js";
+import './utilities/redis.js';
 //import path from "path";
 // import { Customer } from "./models/customer_model";
 // import { Reservation } from "./models/reservation_model";

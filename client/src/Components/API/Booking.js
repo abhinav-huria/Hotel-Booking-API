@@ -29,3 +29,14 @@ export const getBooking = async (bookingId) => {
         console.log(err);
     }
     };
+
+    export const deleteBooking = async (bookingId) => {
+        try {
+            const res = await axios.delete(
+            `http://localhost:3003/api/v1/booking/${bookingId}`
+            );
+            return res.data;
+        } catch (err) {
+            console.log(err);
+        }
+        };

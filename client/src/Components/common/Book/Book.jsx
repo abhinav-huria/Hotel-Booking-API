@@ -60,7 +60,7 @@ const handleBooking = () => {
     hotelId: room.hotelId
     };
     console.log(booking);
-    bookRoom(user,room._id,booking,localStorage.getItem("token")).then(res=>{
+    bookRoom(user,room._id,booking).then(res=>{
         console.log(res);
        navigate(`/booking/${res._id}`);
     }).catch(err=>{

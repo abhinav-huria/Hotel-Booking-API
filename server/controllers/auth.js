@@ -8,7 +8,6 @@ export const signUp = async (req, res) => {
         const addedUser = await newUser.save();
         res.status(201).json(addedUser);
     } catch (error) {
-        // next(error);
         res.status(500).json(error);
     }
 };
@@ -28,7 +27,6 @@ export const signIn = async (req, res) => {
             return res.status(401).json({"message": "Invalid Credentials pw"});
         }
         const token = jwt.sign({id: user._id,isAdmin:user.isAdmin,isHotelOwner:user.isHotelOwner}, process.env.JWT_SECRET);
-       // const {userPassword,userPhoneNumber,userEmail,userBookings,...other} = user._doc;
         res.cookie('token', token).status(200).json({user:user._id,token:token});
     } catch (error) {
         res.status(500).json(error);

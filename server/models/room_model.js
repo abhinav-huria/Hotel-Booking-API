@@ -43,9 +43,12 @@ const RoomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    numberOfRooms: [
+    numberOfRooms: {
+      type: Number,
+      required: true,
+    },
+    roomsAvailable: [
       {
-        number: Number,
         datesBooked: { type: [Date] }, 
       },
     ],

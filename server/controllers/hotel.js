@@ -63,14 +63,22 @@ export const deleteHotel = async (req, res) => {
         };
 
         export const getHotelByCity = async (req, res) => {
+            let cities = await cache.getAsync("cities");
+            if (cities) {
+                return res.status(200).json(cities);
+            } 
             try {
                 const hotel = await Hotel.find({
                     hotelCity: req.params.city
                 });
+                let cacheRes=await cache.setAsync("cities", hotel);
+                console.log(cacheRes);
                 res.status(200).json(hotel);
             } catch (error) {
                 res.status(500).json(error);
             }
+            
+
             };
 
             export const getCities = async (req, res) => {
