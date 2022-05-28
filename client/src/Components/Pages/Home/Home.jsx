@@ -4,6 +4,7 @@ import hotel2 from "../../assets/images/hotel2.jpg";
 import hotel3 from "../../assets/images/hotel3.jpg";
 import React, { useContext } from "react";
 import AddHotels from "../Admin/AddHotels.jsx";
+import Dashboard from "../Admin/Dashboard.jsx";
 import './home.css';
 const Home = () => {
  
@@ -24,6 +25,7 @@ const Home = () => {
                         <img src={hotel3} alt="sample-image" className="sample-image"/>
                    </div>
                 <AddHotels />
+                <Dashboard />
         </>
     );
     }

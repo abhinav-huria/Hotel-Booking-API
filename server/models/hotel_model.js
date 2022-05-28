@@ -2,26 +2,26 @@ import mongoose from "mongoose";
 import { checkLength } from "../controllers/validation.js";
 
 const HotelSchema = new mongoose.Schema({
-  hotelName: {
+  name: {
     type: String,
     required: true,
     unique: true,
   },
-  hotelCity: {
+  city: {
     type: String,
     required: true,
   },
-  hotelAddress: {
+  address: {
     type: String,
     required: true,
   },
-  hotelPhoneNumber: {
+  phoneNumber: {
     type: String,
     required: true,
     unique: true,
     validate: checkLength(10),
   },
-  hotelEmail: {
+email: {
     type: String,
     required: true,
     unique: true,
@@ -30,19 +30,19 @@ const HotelSchema = new mongoose.Schema({
     type: [String],
     required: false,
   },
-  hotelRating: {
+  rating: {
     type: String,
     required: false,
   },
-  hotelDescription: {
+  description: {
     type: String,
     required: true,
   },
-  hotelAmenities: {
+  amenities: {
     type: [String], 
     required: false,
   },
-  hotelRooms: {
+  rooms: {
     type: [String],
     required: false,
   },

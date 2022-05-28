@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("user",(state.user));
+    localStorage.setItem("isAuthenticated",(state.user !== null));
   }, [state.user]);
 
   return (

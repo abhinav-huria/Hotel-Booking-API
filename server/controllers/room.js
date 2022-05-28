@@ -24,11 +24,30 @@ export const addRoom = async (req, res) => {
 
 export const getRoomsByHotel = async (req, res) => {
   try {
-    console.log(req.params.hotelId);
+    const start = req.query.start;
+    const end = req.query.end;
+    console.log(start, end);
+     const bookingDates=getBookingDates(start,end);
     const rooms = await Room.find({ hotelId: req.params.hotelId });
-    console.log(rooms);
-    res.status(200).json(rooms);
+    const available = rooms.filter((room) => {
+      if(room.numberOfRooms> room.roomsAvailable.length){
+        return room;
+      }
+      else if(
+        room.numberOfRooms === room.roomsAvailable.length &&
+        room.roomsAvailable.length > 0
+      ){
+        if(!room.roomsAvailable.some(date => bookingDates.includes(date))){
+        return room;
+      }}
+    else
+      return null;}
+      )
+    res.status(200).json(available);
+    // console.log(rooms);
+    //res.status(200).json(rooms);
   } catch (error) {
+    console.log(req.config);
     res.status(500).json(error);
   }
 };
@@ -102,3 +121,15 @@ export const getAllRooms = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+
+function getBookingDates(startDate, endDate) {
+  let bookingDates = [];
+  let start=new Date(Number(startDate));
+  let end=new Date(Number(endDate));
+  while(start<=end){
+    bookingDates.push(start.getTime());
+    start=new Date(start.setDate(start.getDate()+1));
+  }
+  return bookingDates;
+}

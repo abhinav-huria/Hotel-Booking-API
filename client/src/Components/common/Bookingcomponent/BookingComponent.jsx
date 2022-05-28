@@ -4,7 +4,6 @@ import { Form, Button } from "react-bootstrap";
 import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "./booking.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { searchContext } from "../../Context/search.js";
 import { getAvailableCities } from "../../API/Hotel";
@@ -72,10 +71,7 @@ const BookingComponent = () => {
                 {city}
               </option>
             ))}
-            {/* <option>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option> */}
+        
           </Form.Select>
           <DateRangePicker
           
@@ -110,10 +106,9 @@ const BookingComponent = () => {
             Submit
           </Button>
 
-          {/* <button type="button" className="btn-booking" onClick={handleDateChange}>Submit</button> */}
         </div>
       </div>
-      {/* <button onClick={() => props.handleBooking(city, date)}>Book</button> */}
+     
     </>
   );
 };

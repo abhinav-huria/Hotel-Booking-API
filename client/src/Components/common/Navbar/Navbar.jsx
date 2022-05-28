@@ -30,6 +30,7 @@ const NavbarComponent = () => {
 
     const handleLogout = () => {
       localStorage.removeItem("user");
+      localStorage.setItem("isAuthenticated", false);
       dispatch({type:'LOGOUT'});
      navigate("/");
     };

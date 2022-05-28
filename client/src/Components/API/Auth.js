@@ -24,3 +24,15 @@ export const signIn = async (user) => {
     return error;
   }
 };
+
+export const signOut = async () => {
+  try {
+    const result = await axios.get(
+      "http://localhost:3003/api/v1/auth/signout",
+      { withCredentials: true }
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};

@@ -12,7 +12,7 @@ let link;
             <h5>Room options:</h5>
             </div>
         </div>
-        {rooms.map((room) => (( link=`/bookRoom/?roomId=${room._id}`),(
+        {rooms?.map((room) => (( link=`/bookRoom/?roomId=${room._id}`),(
             <div className="row" key={room._id}>
             <div className="col-md-12">
                 <div className="card">

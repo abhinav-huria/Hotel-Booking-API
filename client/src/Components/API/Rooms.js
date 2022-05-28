@@ -12,10 +12,10 @@ export const addRoom = async (room, hotelId) => {
   }
 };
 
-export const getRoomsByHotel = async (hotelId) => {
+export const getRoomsByHotel = async (hotelId, start,end) => {
   try {
     const result = await axios.get(
-      `http://localhost:3003/api/v1/rooms/getRooms/${hotelId}`
+      `http://localhost:3003/api/v1/rooms/getRooms/${hotelId}?start=${start}&end=${end}`
     );
     return result;
   } catch (error) {

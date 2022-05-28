@@ -9,6 +9,7 @@ import Hotels from './Components/common/Hotel/Hotels';
 import Hotel from './Components/common/Hotel/Hotel';
 import Book from './Components/common/Book/Book';
 import Booking from './Components/common/Book/Booking';
+import ProtectedRoute from './Components/common/ProtectedRoute/ProtectedRoute';
 function App() {
 
   return (
@@ -22,7 +23,9 @@ function App() {
        <Route path="/login" element={<Login />} />
        <Route path="/hotels" element={<Hotels />} />
        <Route path="/viewhotel" element={<Hotel />} />
+       <Route exact path="/bookRoom" element={<ProtectedRoute />} >
        <Route path="/bookRoom" element={<Book />} />
+       </Route>
        <Route path="/booking/:id" element={<Booking />} />
       {/* <Route path="/about" element={<About />} /> 
       <Route path="/hotels/:city/:" element={<Hotels />} />

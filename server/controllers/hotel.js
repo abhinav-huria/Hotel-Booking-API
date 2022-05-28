@@ -78,18 +78,23 @@ export const deleteHotel = async (req, res) => {
 
             export const getCities = async (req, res) => {
                 try {
-                    try{
-                    let cities1 = await cache.getAsync("cities");
-                    console.log(cities1);
-                } 
-                catch(err){
-                    console.log(err);
-                }
-                    console.log("cities1 is null");
-                   const cities = await Hotel.distinct("hotelCity");
-                   let cacheRes=await cache.setAsync("cities", cities);
-                   console.log(cacheRes);
-                    res.status(200).json(cities);
+                 const cacheCities = await cache.get("cities");
+              cache.del("cities");
+                    if (cacheCities!==null) {
+                        console.log("cache hit");
+                       return res.status(200).json(JSON.parse(cacheCities));
+                    } else {
+                        console.log("cache not found");
+                    }
+                   const cities = await Hotel.distinct("city");
+                   try{
+                     await cache.set("cities", JSON.stringify(cities));
+                     cache.expire("cities", 7200);
+                   }
+                     catch(error){
+                         console.log(error);    
+                        }
+               res.status(200).json(cities);
                 } catch (error) {
                     res.status(500).json(error);
                 }

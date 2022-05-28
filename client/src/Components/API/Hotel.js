@@ -14,14 +14,7 @@ export const getHotel = async (id) => {
 
 export const addHotel = async (hotel) => {
   const result = await axios.post("http://localhost:3003/api/v1/hotels/addhotel", {
-    hotelName: hotel.hotelName,
-    hotelCity: hotel.hotelCity,
-    hotelAddress: hotel.hotelAddress,
-    hotelPhoneNumber: hotel.hotelPhoneNumber,
-    hotelEmail: hotel.hotelEmail,
-    photos: hotel.photos,
-    hotelDescription: hotel.hotelDescription,
-    hotelAmenities: hotel.hotelAmenities,
+   hotel
   });
 
   return result;

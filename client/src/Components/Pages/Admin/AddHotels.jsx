@@ -2,17 +2,17 @@ import { Form } from "react-bootstrap";
 import { useState } from "react";
 import { addHotel } from "../../API/Hotel.js";
 const AddHotels = () => {
-  const [hotel, setHotel] = useState({
-    hotelName: "",
-    hotelAddress: "",
-    hotelCity: "",
-    photos: [],
-    hotelPhoneNumber: "",
-    hotelEmail: "",
-    // hotelRating: "",
-    hotelDescription: "",
-    hotelAmenities: [],
-  });
+  const [hotel, setHotel] = useState({});
+  //   hotelName: "",
+  //   hotelAddress: "",
+  //   hotelCity: "",
+  //   photos: [],
+  //   hotelPhoneNumber: "",
+  //   hotelEmail: "",
+  //   hotelRating: "",
+  //   hotelDescription: "",
+  //   amenities: [],
+  // });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setHotel({
@@ -44,7 +44,7 @@ const AddHotels = () => {
             placeholder="Enter Hotel Name"
             name="hotelName"
             onChange={handleChange}
-            value={hotel.hotelName}
+            value={hotel.name}
           />
         </Form.Group>
         <Form.Group controlId="hotelAddress">
@@ -54,7 +54,7 @@ const AddHotels = () => {
             placeholder="Enter Hotel Address"
             name="hotelAddress"
             onChange={handleChange}
-            value={hotel.hotelAddress}
+            value={hotel.address}
           />
         </Form.Group>
         <Form.Group controlId="hotelCity">
@@ -64,7 +64,7 @@ const AddHotels = () => {
             placeholder="Enter Hotel City"
             name="hotelCity"
             onChange={handleChange}
-            value={hotel.hotelCity}
+            value={hotel.city}
           />
         </Form.Group>
       
@@ -75,7 +75,7 @@ const AddHotels = () => {
             placeholder="Enter Hotel Phone Number"
             name="hotelPhoneNumber"
             onChange={handleChange}
-            value={hotel.hotelPhoneNumber}
+            value={hotel.phoneNumber}
           />
         </Form.Group>
         <Form.Group controlId="hotelEmail">
@@ -85,19 +85,19 @@ const AddHotels = () => {
             placeholder="Enter Hotel Email"
             name="hotelEmail"
             onChange={handleChange}
-            value={hotel.hotelEmail}
+            value={hotel.email}
           />
         </Form.Group>
-        {/* <Form.Group controlId="hotelRating">
+        <Form.Group controlId="hotelRating">
           <Form.Label>Hotel Rating</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter Hotel Rating"
             name="hotelRating"
             onChange={handleChange}
-            value={hotel.hotelRating}
+            value={hotel.rating}
           />
-        </Form.Group> */}
+        </Form.Group>
         <Form.Group controlId="hotelDescription">
           <Form.Label>Hotel Description</Form.Label>
           <Form.Control
@@ -105,12 +105,12 @@ const AddHotels = () => {
             placeholder="Enter Hotel Description"
             name="hotelDescription"
             onChange={handleChange}
-            value={hotel.hotelDescription}
+            value={hotel.description}
           />
         </Form.Group>
         {/* <Form.Group controlId="formBasicEmail">
                     <Form.Label>Hotel Amenities</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Hotel Amenities" name="hotelAmenities" onChange={handleChange} value={hotel.hotelAmenities}/>
+                    <Form.Control type="text" placeholder="Enter Hotel Amenities" name="amenities" onChange={handleChange} value={hotel.amenities}/>
                 </Form.Group> */}
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Hotel Photos</Form.Label>
@@ -124,78 +124,78 @@ const AddHotels = () => {
             value={hotel.photos}
           />
         </Form.Group>
-        {/* <Form.Group controlId="hotelAmenities">
+        <Form.Group controlId="amenities">
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Free Wifi"
             onChange={handleCheckbox}
             value="Free Wifi"
           />
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Free Parking"
             onChange={handleCheckbox}
             value="Free Parking"
           />
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Free Breakfast"
             onChange={handleCheckbox}
             value="Free Breakfast"
           />
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Swimming Pool"
             onChange={handleCheckbox}
             value="Swimming Pool"
           />
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Gym"
             onChange={handleCheckbox}
             value="Gym"
           />
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Spa"
             onChange={handleCheckbox}
             value="Spa"
           />
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Restaurant"
             onChange={handleCheckbox}
             value="Restaurant"
           />
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Bar"
             onChange={handleCheckbox}
             value="Bar"
           />
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Laundry"
             onChange={handleCheckbox}
             value="Laundry"
           />
           <Form.Check
             type="checkbox"
-            name="hotelAmenities"
+            name="amenities"
             label="Airport Shuttle"
             onChange={handleCheckbox}
             value="Airport Shuttle"
           />
-        </Form.Group> */}
+        </Form.Group>
 
         <button
           type="button"
