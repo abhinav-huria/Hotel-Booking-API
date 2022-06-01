@@ -1,4 +1,4 @@
-import { useState } from "react";
+import "./dashboard.css";
 
 const Dashboard = () => {
     const options = [
@@ -31,30 +31,24 @@ link: "/modifyhotels",
 
     return (
         <>
+        <div className="container">
+        <div className="row">
+        <div className="outer-box">
 { options.map((option) => (
  
-      <div className="container">
-        <div className="row">
-          <div className="col-md-4">
-            <div className="card">
-              <div className="card-header">
-                <h3>{option.title}</h3>
-              </div>
-              <div className="card-body">
-               
-                  <div className="col-md-4">
-                    <a href={option.link}>
-                    click</a>
-                   
-               
-              </div>
-            </div>
+      
+          <div key={option.link} className="col-md-4">
+          <div className="box">
+          <a href={option.link}>{option.title}</a>
           </div>
+           
         </div>
-      </div>
-      </div>
+     
   
   ))}
+  </div>
+  </div>
+      </div>
   </>)
 };
 

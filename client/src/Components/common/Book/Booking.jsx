@@ -17,6 +17,8 @@ const Booking = () => {
         async function fetchData() {
             const response = await getBooking(id);
             setBooking(response);
+            // setStart(response.startAt);
+            // setEnd(response.endAt);
             setStart(response.startAt.split("T")[0]);
             setEnd(response.endAt.split("T")[0]);
             const hotelResponse = await getHotel(response.hotelId);
@@ -32,7 +34,11 @@ const Booking = () => {
 
     return(
         <>
-<h3>Your booking is confirmed</h3>
+        <div className="container">
+        <div className="outer-box-1">
+        <div className="white-bg-1">
+<h3>Your booking is confirmed! Have a pleasant stay.</h3>
+
 <div className="card">
 <h4>{hotel.hotelName}</h4>
 <p>Room: {room.name}</p>
@@ -42,8 +48,16 @@ const Booking = () => {
 <p>Amount paid: {booking.totalPrice}</p>
 
 </div>
-{/* <p>{booking.startAt.split("T")[0]}</p> */}
-<p>{start}</p>
+<ul>
+<li> Please carry a valid ID card</li>
+<li> Please check out at least 15 minutes before the check out time</li>
+<li><a href="/help">Click here</a> for help</li>
+<li>You can check your bookings using the <a href="/mybookings">my bookings</a> section</li>
+<li>We are not liable for any discrepamcies/losses you may experience during your stay</li>
+</ul>
+</div></div>
+</div>
+
         </>
        
     )

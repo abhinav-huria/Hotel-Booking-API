@@ -1,6 +1,10 @@
+//DEPENDENCIES
 import mongoose from "mongoose";
+
+//VALIDATOR
 import { checkLength } from "../controllers/validation.js";
 
+//SCHEMA
 const HotelSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -49,4 +53,5 @@ email: {
  
 });
 
+//MODEL EXPORT
 export default mongoose.model("Hotel", HotelSchema);

@@ -1,5 +1,5 @@
 import User from "../models/customer_model.js";
-
+import Dispute from "../models/dispute_model.js";
 export const updateUser = async (req,res,next)=>{
   try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -22,7 +22,7 @@ export const deleteUser = async (req,res,next)=>{
 }
 export const getUser = async (req,res,next)=>{
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.userId);
     const{ userPassword,userPhoneNumber, ...other}=user._doc;
     res.status(200).json(other);
   } catch (err) {
@@ -37,3 +37,14 @@ export const getUsers = async (req,res,next)=>{
     res.status(500).json(err);
   }
 }
+
+export const submitDispute = async (req,res,next)=>{
+  try{
+    const newDispute = new Dispute(req.body);
+    const addedDispute = await newDispute.save();
+    res.status(201).json(addedDispute);
+  }catch(err){
+    res.status(500).json(err);
+  }
+
+  }

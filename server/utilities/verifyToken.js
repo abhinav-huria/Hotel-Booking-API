@@ -1,7 +1,8 @@
+//DEPENDENCIES
 import jwt from "jsonwebtoken";
 
+//TOKEN VERIFICATION
 export const verifyToken = (req, res, next) => {
-  
   const token = req.cookies.token;
   if (!token) {
     return res.status(401).json({
@@ -10,7 +11,7 @@ export const verifyToken = (req, res, next) => {
   }
   try {
     console.log(token);
-    const decoded =  jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
@@ -20,30 +21,37 @@ export const verifyToken = (req, res, next) => {
   }
 };
 
+//ADMIN VERIFICATION
 export const verifyAdmin = (req, res, next) => {
-    verifyToken(req, res, () => {
-        if (req.user.isAdmin) {
-          next();
-        } else {
-          return res.status(403).json({
-            message: "You are not authorized to perform this action",
-          });
-        }
-      });
-    };
-
-export const verifyUser = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user.isAdmin || req.user.id === req.params.userId) {
+    if (req.user.isAdmin) {
       next();
     } else {
       return res.status(403).json({
-        message: "You are not authorized to perform this action. Please try again",
+        message: "You are not authorized to perform this action",
       });
     }
   });
 };
 
+//USER VERIFICATION
+export const verifyUser = (req, res, next) => {
+  verifyToken(req, res, () => {
+    console.log(req.user);
+    console.log(req.params);
+    console.log(req.user.id === req.params.userId)
+    if (req.user.isAdmin || req.user.id === req.params.userId) {
+      next();
+    } else {
+      return res.status(403).json({
+        message:
+          "You are not authorized to perform this action. Please try again",
+      });
+    }
+  });
+};
+
+//COMPANY VERIFICATION
 export const verifyHotelOwner = (req, res, next) => {
   verifyToken(req, res, () => {
     if (req.user.isAdmin || req.user.isHotelOwner) {

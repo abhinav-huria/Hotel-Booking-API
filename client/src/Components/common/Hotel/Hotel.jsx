@@ -69,10 +69,12 @@ getBookingDates();
   return (
     <div>
       <div className="container">
+      <div className="outer-box-2">
+      <div className="white-bg-1">
         <div className="row">
           <div className="col-md-12">
             {/* <img src={hotel.photos[0]} alt=""/> */}
-            abc
+          
           </div>
         </div>
         <div className="row">
@@ -102,6 +104,8 @@ getBookingDates();
         <div className="row">
           <HotelRooms rooms={rooms} />
         </div>
+      </div>
+      </div>
       </div>
     </div>
   );

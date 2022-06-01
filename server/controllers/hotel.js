@@ -7,6 +7,7 @@ export const addHotel = async (req, res) => {
     res.status(201).json(addedHotel);
   } catch (error) {
     // next(error);
+    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -54,7 +55,7 @@ export const deleteHotel = async (req, res) => {
     export const getHotelByName = async (req, res) => {
         try {
             const hotel = await Hotel.findOne({
-                hotelName: req.params.name
+                name: req.params.name
             });
             res.status(200).json(hotel);
         } catch (error) {
@@ -63,10 +64,10 @@ export const deleteHotel = async (req, res) => {
         };
 
         export const getHotelByCity = async (req, res) => {
-           
+           console.log(req.params.city);
             try {
                 const hotel = await Hotel.find({
-                    hotelCity: req.params.city
+                    city: req.params.city
                 });
                 res.status(200).json(hotel);
             } catch (error) {

@@ -6,26 +6,37 @@ import React, { useContext } from "react";
 import AddHotels from "../Admin/AddHotels.jsx";
 import Dashboard from "../Admin/Dashboard.jsx";
 import './home.css';
+import AddRoom from "../Admin/AddRoom.jsx";
 const Home = () => {
  
     return (
         <>
        
             {/* <Navbar /> */}
-           <div className="outer-cont-search">
+            <div className="container">
+                <div className="row">
+                  
+                    <div className="col-md-2"></div>
+                    <div className="col-md-8">
+          <div className="search-container">
            <h2 className="search-heading">Book your next stay at exciting prices!</h2>
-                 <div className="inner-cont-search">
+               
                 
                  <BookingComponent/>
                  </div>
+                 <div className="col-md-2"></div>
+                 </div>
+                 </div>  
+                
                  </div>    
-                   <div className="sample-images">
+               
+                   {/* <div className="sample-images">
                      <img src={hotel1} alt="sample-image" className="sample-image"/>
                         <img src={hotel2} alt="sample-image" className="sample-image"/>
                         <img src={hotel3} alt="sample-image" className="sample-image"/>
-                   </div>
-                <AddHotels />
-                <Dashboard />
+                   </div> */}
+               
+                
         </>
     );
     }

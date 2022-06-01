@@ -1,22 +1,24 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-// import axios from "axios";
 
-function ProtectedRoute({ component: Component, ...restOfProps }) {
-console.log('ProtectedRoute');
+function ProtectedRouteAdmin({ component: Component, ...restOfProps }) {
+console.log('ProtectedRouteAdmin');
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   console.log(isAuthenticated);
-  if(isAuthenticated === "false"){
-    console.log("not authenticated");
+  const isAdmin = localStorage.getItem("isAdmin");
+
+  if(isAuthenticated === "true" && isAdmin === "true"){
+    return <Outlet />;
   }
-    return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+ 
+    return <Navigate to="/login" />;
 
 
     
    
 }
 
-export default ProtectedRoute;
+export default ProtectedRouteAdmin;
 
 {/* <Route exact path="/dashboard" element={<ProtectedRoute />}>
               <Route exact path="/dashboard" element={<Dashboard />} />

@@ -1,58 +1,34 @@
+//DEPENDENCIES:
 import redis from "redis";
-import { promisify } from "util";
 import dotenv from "dotenv";
 dotenv.config();
-const url1="redis://default:aFzD6xo5zD5AfAwmtNbAYCJD2oyxGQbJ@redis-15653.c301.ap-south-1-1.ec2.cloud.redislabs.com:15653";
 
-// function decomposeRedisUrl(url) {
-//     const [[, , password, host, port]] = [...(url.matchAll(/redis:\/\/(([^@]*)@)?(.*?):(\d*)/g))];
-//     return { password, host, port };
-//   }
+//CONNECTION URL
+const url=`redis://${process.env.REDIS_USER}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
 
-//     const { password, host, port } = decomposeRedisUrl(url1);
+//REDIS CLIENT
 export const redisClient = redis.createClient({
-url: url1
+url: url,
 });
 
-// const password = process.env.REDIS_PASSWORD || null;
-// if(password && password != "null"){
- redisClient.connect();
-console.log(process.env.REDIS_PASSWORD);
-// redisClient.AUTH("aFzD6xo5zD5AfAwmtNbAYCJD2oyxGQbJ").then(() => {
-//   console.log("Connected to Redis auth");
-// }).catch(err => {
-//   console.log("Error connecting to Redis auth", err);
-// });
+//CONNECT TO REDIS
+redisClient.connect();
 
 
-try{
-    redisClient.getAsync = promisify(redisClient.get).bind(redisClient);
-    redisClient.setAsync = promisify(redisClient.set).bind(redisClient);
-    redisClient.lpushAsync = promisify(redisClient.lPush).bind(redisClient);
-    redisClient.lrangeAsync = promisify(redisClient.lRange).bind(redisClient);
-    redisClient.llenAsync = promisify(redisClient.lLen).bind(redisClient);
-    redisClient.lremAsync = promisify(redisClient.lRem).bind(redisClient);
-    redisClient.lsetAsync = promisify(redisClient.lSet).bind(redisClient);
-    redisClient.hmsetAsync = promisify(redisClient.hSet).bind(redisClient);
-    redisClient.hmgetAsync = promisify(redisClient.hmGet).bind(redisClient);
-    redisClient.clear = promisify(redisClient.del).bind(redisClient);
-}catch (e) {
-    console.log("redis error", e);
-}
-
+//CHECK IF REDIS CONNECTION IS SUCCESSFUL
 redisClient.on("connect", async () => {
   console.log("Connected to Redis");
-  await redisClient.set("too1", "barr");
-  let rest= await redisClient.get("too1");
-    console.log(rest);
 });
 
 redisClient.on("error", function (err) {
   console.log("Redis error.", err);
 });
+
+//REDIS PING
 // setInterval(function() {
 //     console.log("Keeping alive - Node.js Performance Test with Redis");
 //     redisClient.set('ping', 'pong');
 // }, 10000);
 
+//GLOBAL EXPORT
 global.cache = redisClient;

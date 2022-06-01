@@ -5,6 +5,7 @@ import { signIn } from "../../API/Auth.js";
 import { useContext, useState } from "react";
 import { authContext } from "../../Context/authContext.js";
 import queryString from "query-string";
+import "./login.css";
 export default function Login() {
   const [user, setUser] = useState({
     email: "",
@@ -25,16 +26,24 @@ const [err, setErr] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch({ type: "LOGIN_START" });
+
     try {
       const response = await signIn(user);
       console.log(response);
+      
       if(response.status === 200){
       dispatch({ type: "LOGIN_SUCCESS", payload: response.data.user });
 localStorage.setItem("token", response.data.token);
+localStorage.setItem("isAuthenticated", true);
 console.log(response.data.token);
       const { redirectTo } = queryString.parse(location.search);
-      
-     navigate(redirectTo == null ? "/" : redirectTo);
+      console.log(redirectTo);
+      if(redirectTo){
+        navigate(redirectTo);
+      }else{
+        navigate("/");
+      }
+     //navigate((redirectTo == null) ? "/" : `${redirectTo}`);
       }
       else
       {
@@ -50,6 +59,11 @@ console.log(response.data.token);
   return (
     <>
       <div className="container">
+      <div className="row">
+     
+      <div className="col-md-4"></div>
+      <div className="col-md-4">
+      <div className="bg-white">
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
@@ -81,6 +95,10 @@ console.log(response.data.token);
           {err? <p>{err}</p> : null}
         </Form>
         <Link to="/signup">Don't have an account yet?</Link>
+        </div></div>
+        <div className="col-md-4"></div>
+       
+        </div>
       </div>
     </>
   );

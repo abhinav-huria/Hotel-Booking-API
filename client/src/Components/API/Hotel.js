@@ -13,9 +13,10 @@ export const getHotel = async (id) => {
 };
 
 export const addHotel = async (hotel) => {
-  const result = await axios.post("http://localhost:3003/api/v1/hotels/addhotel", {
-   hotel
-  });
+  const result = await axios.post("http://localhost:3003/api/v1/hotels/addhotel", 
+   hotel,
+   {withCredentials: true}
+  );
 
   return result;
 };
@@ -38,7 +39,7 @@ export const deleteHotel = async (id) => {
 
 export const getHotelByCity = async (city) => {
   const result = await axios.get(`http://localhost:3003/api/v1/hotels/city/${city}`);
-
+  console.log(city+"_");
   return result;
 };
 

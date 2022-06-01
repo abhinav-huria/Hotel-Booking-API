@@ -11,7 +11,7 @@ export const getUsers = async () => {
 
 export const getUser = async (userId) => {
     try {
-        const result = await axios.get(`http://localhost:3003/api/v1/users/${userId}`);
+        const result = await axios.get(`http://localhost:3003/api/v1/users/${userId}`, {withCredentials: true});
         return result;
     } catch (error) {
         return error;
@@ -36,4 +36,11 @@ export const getUser = async (userId) => {
         }
     }
 
-    
+    export const submitDispute = async (dispute, userId) => {
+        try {
+            const result = await axios.post(`http://localhost:3003/api/v1/users/dispute/${userId}`, dispute,{withCredentials: true});
+            return result;
+        } catch (error) {
+            return error;
+        }
+    }

@@ -1,24 +1,35 @@
+//DEPENDENCIES
 import express from "express";
+
+//CONTROLLER(S)
 import {
   updateUser,
   deleteUser,
   getUser,
   getUsers,
+  submitDispute
 } from "../controllers/user.js";
+
+//VERIFICATION
 import { verifyAdmin, verifyUser } from "../utilities/verifyToken.js";
 
+//ROUTER
 const router = express.Router();
 
-//UPDATE
-router.put("/:id", updateUser);
+//UPDATE(USER ONLY)
+router.put("/:userId", verifyUser, updateUser);
 
-//DELETE
-router.delete("/:id", deleteUser);
+//DELETE USER(ADMIN ONLY)
+router.delete("/:userId", verifyAdmin, deleteUser);
 
-//GET
-router.get("/:id", getUser);
+//GET USER(USER ONLY)
+router.get("/:userId", verifyUser, getUser);
 
-//GET ALL
-router.get("/all/c", getUsers);
+//GET ALL USERS(ADMIN ONLY)
+router.get("/all/c", verifyAdmin, getUsers);
 
+//POST DISPUTE
+router.post("/dispute/:userId", verifyUser, submitDispute);
+
+//EXPORT
 export default router;

@@ -4,7 +4,8 @@ export const addRoom = async (room, hotelId) => {
   try {
     const result = await axios.post(
       `http://localhost:3003/api/v1/rooms/addRoom/${hotelId}`,
-      room
+      room,
+      { withCredentials: true }
     );
     return result;
   } catch (error) {

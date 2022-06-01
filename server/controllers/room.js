@@ -1,6 +1,6 @@
 import Room from "../models/room_model.js";
 import Hotel from "../models/hotel_model.js";
-
+import { getBookingDates } from "./validation.js";
 export const addRoom = async (req, res) => {
   try {
     const newRoom = new Room(req.body);
@@ -123,13 +123,3 @@ export const getAllRooms = async (req, res) => {
 };
 
 
-function getBookingDates(startDate, endDate) {
-  let bookingDates = [];
-  let start=new Date(Number(startDate));
-  let end=new Date(Number(endDate));
-  while(start<=end){
-    bookingDates.push(start.getTime());
-    start=new Date(start.setDate(start.getDate()+1));
-  }
-  return bookingDates;
-}

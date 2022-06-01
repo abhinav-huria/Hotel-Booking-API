@@ -64,7 +64,7 @@ const BookingComponent = () => {
             aria-label="Default select"
           >
             <option value="def" key={-1}>
-              Please select city
+             City
             </option>
             {cities.map((city) => (
               <option value={city} key={city}>
@@ -77,7 +77,7 @@ const BookingComponent = () => {
           
                     onChange={setDates}
                     value={dates}
-            className="date-picker"
+           
             minDate={new Date()}
             maxDate={new Date(2022, 12, 31)}
           />
@@ -102,8 +102,8 @@ const BookingComponent = () => {
               4(Max)
             </option>
           </Form.Select>
-          <Button type="button" className="btn-booking" onClick={handleSearch}>
-            Submit
+          <Button type="button" className="btn btn-danger" onClick={handleSearch}>
+            Search
           </Button>
 
         </div>

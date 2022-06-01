@@ -1,9 +1,11 @@
 import React, { useState } from "react";
- import { useNavigate } from "react-router-dom";
+ import { useNavigate, Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { signUp } from "../../API/Auth.js";
 import Login from "./Login.js";
+import "./login.css";
+
 export default function Register() {
   const [user, setUser] = useState({
     userName: "",
@@ -42,6 +44,10 @@ const navigate = useNavigate();
   return (
     <>
       <div className="container">
+      <div className="row">
+      <div className="col-md-3"></div>
+      <div className="col-md-6">
+      <div className="bg-white">
       {error? <div className="alert alert-danger">{error}</div>:null}
         <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="userNhgame">
@@ -88,6 +94,10 @@ const navigate = useNavigate();
           Submit
         </Button>
       </Form>
+      <Link to="/login">Already have an account?</Link>
+      </div></div>
+      <div className="col-md-3"></div>
+      </div>
       </div>
 
         

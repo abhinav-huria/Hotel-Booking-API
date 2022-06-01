@@ -1,18 +1,22 @@
 import { Form } from "react-bootstrap";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { addHotel } from "../../API/Hotel.js";
 const AddHotels = () => {
-  const [hotel, setHotel] = useState({});
-  //   hotelName: "",
-  //   hotelAddress: "",
-  //   hotelCity: "",
-  //   photos: [],
-  //   hotelPhoneNumber: "",
-  //   hotelEmail: "",
-  //   hotelRating: "",
-  //   hotelDescription: "",
-  //   amenities: [],
-  // });
+  const [hotel, setHotel] = useState({
+   name: "",
+    address: "",
+   city: "",
+    photos: [],
+    phoneNumber: "",
+    email: "",
+    rating: "",
+   description: "",
+    amenities: [],
+  });
+  const navigate = useNavigate();
+
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setHotel({
@@ -32,86 +36,94 @@ const AddHotels = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(hotel);
-    addHotel(hotel);
+    addHotel(hotel).then((res) => {
+      console.log(res);
+    navigate(`/addroom/${res.data._id}`);
+    }).catch
+    (err => {
+
+      console.log("idhar aaya");
+    });
   };
   return (
     <div className="container">
+    <div className="add-hotel-form">
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="hotelName">
           <Form.Label>Hotel Name</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter Hotel Name"
-            name="hotelName"
+            name="name"
             onChange={handleChange}
             value={hotel.name}
           />
-        </Form.Group>
+        </Form.Group> <br/>
         <Form.Group controlId="hotelAddress">
           <Form.Label>Hotel Address</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter Hotel Address"
-            name="hotelAddress"
+            name="address"
             onChange={handleChange}
             value={hotel.address}
           />
-        </Form.Group>
+        </Form.Group> <br/>
         <Form.Group controlId="hotelCity">
           <Form.Label>Hotel City</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter Hotel City"
-            name="hotelCity"
+            name="city"
             onChange={handleChange}
             value={hotel.city}
           />
-        </Form.Group>
+        </Form.Group> <br/>
       
         <Form.Group controlId="hotelPhoneNumber">
           <Form.Label>Hotel Phone Number</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter Hotel Phone Number"
-            name="hotelPhoneNumber"
+            name="phoneNumber"
             onChange={handleChange}
             value={hotel.phoneNumber}
           />
-        </Form.Group>
+        </Form.Group> <br/>
         <Form.Group controlId="hotelEmail">
           <Form.Label>Hotel Email</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter Hotel Email"
-            name="hotelEmail"
+            name="email"
             onChange={handleChange}
             value={hotel.email}
           />
-        </Form.Group>
+        </Form.Group> <br/>
         <Form.Group controlId="hotelRating">
           <Form.Label>Hotel Rating</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter Hotel Rating"
-            name="hotelRating"
+            name="rating"
             onChange={handleChange}
             value={hotel.rating}
           />
-        </Form.Group>
+        </Form.Group> <br/>
         <Form.Group controlId="hotelDescription">
           <Form.Label>Hotel Description</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter Hotel Description"
-            name="hotelDescription"
+            name="description"
             onChange={handleChange}
             value={hotel.description}
           />
-        </Form.Group>
+        </Form.Group> <br/>
         {/* <Form.Group controlId="formBasicEmail">
                     <Form.Label>Hotel Amenities</Form.Label>
                     <Form.Control type="text" placeholder="Enter Hotel Amenities" name="amenities" onChange={handleChange} value={hotel.amenities}/>
-                </Form.Group> */}
+                </Form.Group> <br/> */}
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Hotel Photos</Form.Label>
           <Form.Control
@@ -123,7 +135,7 @@ const AddHotels = () => {
             onChange={handleChange}
             value={hotel.photos}
           />
-        </Form.Group>
+        </Form.Group> <br/>
         <Form.Group controlId="amenities">
           <Form.Check
             type="checkbox"
@@ -195,16 +207,17 @@ const AddHotels = () => {
             onChange={handleCheckbox}
             value="Airport Shuttle"
           />
-        </Form.Group>
+        </Form.Group> <br/>
 
         <button
           type="button"
           onClick={handleSubmit}
-          className="btn btn-primary"
+          className="btn btn-danger"
         >
           Submit
         </button>
       </Form>
+      </div>
     </div>
   );
 };

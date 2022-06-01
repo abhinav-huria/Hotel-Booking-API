@@ -1,15 +1,20 @@
 .cont-booking-form{
     display: flex;
-    width: 100%;
+   
+    justify-content: center;
+    background-color: white;
+   min-height:12vh ;
+   max-height: 50vh;
+   border-radius: 18px;
 }
 .inner-cont-booking-form{
     
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-   padding: 10px;
-    margin: 0 auto;
+    
+   padding: 30px 15px 30px 15px;
+    width:100%;
    gap:4%;
 }
 .select-city{
@@ -17,21 +22,17 @@
    
 }
 
-.date-picker{
+/* .date-picker{
     width: 30%;
-   border-radius: 10px;
-}
+  
+} */
 .guest-select{
     width: 10%;
     
 }
-.btn-booking{
-    color: rgb(146, 0, 243);;
-    background-color: rgb(146, 0, 243);
-   width: 10%;
-}
 
-@media (max-width:730px) {
+
+@media (max-width:1000px) {
     
     .inner-cont-booking-form{
         flex-direction: column;

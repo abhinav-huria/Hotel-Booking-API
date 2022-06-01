@@ -302,3 +302,21 @@ const NavbarComponent = () => {
     const getHotels = (searchTerm,searchLocation,searchPrice,searchRooms,searchRating,searchType,searchSort,searchFilter,searchFilterValue,searchFilterValue2,searchFilterValue3,searchFilterValue4,searchFilterValue5,searchFilterValue6,searchFilterValue7,searchFilterValue8) => {
         return axios.get(`/api/hotels/search?searchTerm=${searchTerm}&searchLocation=${searchLocation}&searchPrice=${searchPrice}&searchRooms=${searchRooms}&searchRating=${searchRating}&searchType=${searchType}&searchSort=${searchSort}&searchFilter=${searchFilter}&searchFilterValue=${searchFilterValue}&searchFilterValue2=${searchFilterValue2}&searchFilterValue3=${searchFilterValue3}&searchFilterValue4=${searchFilterValue4}&searchFilterValue5=${searchFilterValue5}&searchFilterValue6=${searchFilterValue6}&searchFilterValue7=${searchFilterValue7}&searchFilterValue8=${searchFilterValue8}&page=${page}`);
     }
+
+
+//redis
+
+try{
+    redisClient.getAsync = promisify(redisClient.get).bind(redisClient);
+    redisClient.setAsync = promisify(redisClient.set).bind(redisClient);
+    redisClient.lpushAsync = promisify(redisClient.lPush).bind(redisClient);
+    redisClient.lrangeAsync = promisify(redisClient.lRange).bind(redisClient);
+    redisClient.llenAsync = promisify(redisClient.lLen).bind(redisClient);
+    redisClient.lremAsync = promisify(redisClient.lRem).bind(redisClient);
+    redisClient.lsetAsync = promisify(redisClient.lSet).bind(redisClient);
+    redisClient.hmsetAsync = promisify(redisClient.hSet).bind(redisClient);
+    redisClient.hmgetAsync = promisify(redisClient.hmGet).bind(redisClient);
+    redisClient.clear = promisify(redisClient.del).bind(redisClient);
+}catch (e) {
+    console.log("redis error", e);
+}

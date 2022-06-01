@@ -40,3 +40,15 @@ export const getBooking = async (bookingId) => {
             console.log(err);
         }
         };
+
+        export const getUserBookings = async (userId) => {
+            try {
+                const res = await axios.get(
+                `http://localhost:3003/api/v1/booking/mybookings/${userId}`,
+                { withCredentials: true }
+                );
+                return res.data;
+            } catch (err) {
+                console.log(err);
+            }
+            };

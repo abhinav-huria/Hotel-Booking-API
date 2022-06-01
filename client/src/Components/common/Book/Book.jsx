@@ -60,16 +60,30 @@ const handleBooking = () => {
     hotelId: room.hotelId
     };
     console.log(booking);
+    console.log(localStorage.getItem("isAuthenticated"));
+    //console.log(location);
+    if(localStorage.getItem("isAuthenticated")==="false" || localStorage.getItem("isAuthenticated")===null){
+
+      navigate(`/login?redirectTo=${location.pathname}${location.search}`);
+      
+  }
+  else{
     bookRoom(user,room._id,booking).then(res=>{
         console.log(res);
+        
+       
        navigate(`/booking/${res._id}`);
+
     }).catch(err=>{
+      setError("Uh oh! Someone already booked this room");
         console.log(err);
     });
+}
 };
   return (
     <>
       <div className="container">
+      {error && <p className="error">{error}</p>}
       <div className="box">
         <div className="row">
           <h5>Confirm your booking</h5>

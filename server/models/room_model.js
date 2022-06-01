@@ -1,5 +1,7 @@
+//DEPENDENCIES
 import mongoose from "mongoose";
 
+//SCHEMA
 const RoomSchema = new mongoose.Schema(
   {
     name: {
@@ -25,19 +27,9 @@ const RoomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    internet: {
-      type: Boolean,
-      default: false,
-    },
-
-    breakfast: {
-      type: Boolean,
-      default: false,
-    },
-
-    airConditioned: {
-      type: Boolean,
-      default: false,
+   amenities: {
+      type: [String],
+      required: false,
     },
     hotelId: {
       type: String,
@@ -49,7 +41,7 @@ const RoomSchema = new mongoose.Schema(
     },
     roomsAvailable: [
       {
-        datesBooked: { type: [Date] }, 
+        datesBooked: { type: [String] },
       },
     ],
   },
@@ -58,4 +50,5 @@ const RoomSchema = new mongoose.Schema(
   }
 );
 
+//MODEL EXPORT
 export default mongoose.model("Room", RoomSchema);
