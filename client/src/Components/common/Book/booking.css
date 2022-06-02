@@ -1,0 +1,11 @@
+.booking-conf-div {
+  width: 60%;
+  height: auto;
+  margin: auto;
+  margin-top: 7%;
+  background-color: #fff;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 3% 6% 5% 8%;
+}

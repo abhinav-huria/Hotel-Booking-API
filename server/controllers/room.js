@@ -7,7 +7,7 @@ export const addRoom = async (req, res) => {
     const addedRoom = await newRoom.save();
     try {
       await Hotel.findByIdAndUpdate(req.params.hotelId, {
-        $push: { hotelRooms: addedRoom._id },
+        $push: { rooms: addedRoom._id },
       });
     } catch (err) {
       return res.status(500).json({
@@ -26,28 +26,29 @@ export const getRoomsByHotel = async (req, res) => {
   try {
     const start = req.query.start;
     const end = req.query.end;
-    console.log(start, end);
      const bookingDates=getBookingDates(start,end);
     const rooms = await Room.find({ hotelId: req.params.hotelId });
+let avail=[];
     const available = rooms.filter((room) => {
       if(room.numberOfRooms> room.roomsAvailable.length){
-        return room;
+       avail.push(room);
       }
-      else if(
-        room.numberOfRooms === room.roomsAvailable.length &&
-        room.roomsAvailable.length > 0
-      ){
-        if(!room.roomsAvailable.some(date => bookingDates.includes(date))){
-        return room;
-      }}
-    else
-      return null;}
-      )
+      else{
+        for (let i = 0; i < room.roomsAvailable.length; i++) {
+          if (
+            bookingDates.some((date) =>
+              !room.roomsAvailable[i].datesBooked.includes(date)
+            )
+          ) {
+            avail.push(room);
+          }}
+      }
+   }
+    );
+      
     res.status(200).json(available);
-    // console.log(rooms);
-    //res.status(200).json(rooms);
+ 
   } catch (error) {
-    console.log(req.config);
     res.status(500).json(error);
   }
 };

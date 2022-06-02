@@ -4,10 +4,9 @@ export const addHotel = async (req, res) => {
   try {
     const newHotel = new Hotel(req.body);
     const addedHotel = await newHotel.save();
+    cache.del("cities");
     res.status(201).json(addedHotel);
   } catch (error) {
-    // next(error);
-    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -64,7 +63,6 @@ export const deleteHotel = async (req, res) => {
         };
 
         export const getHotelByCity = async (req, res) => {
-           console.log(req.params.city);
             try {
                 const hotel = await Hotel.find({
                     city: req.params.city
@@ -80,12 +78,9 @@ export const deleteHotel = async (req, res) => {
             export const getCities = async (req, res) => {
                 try {
                  const cacheCities = await cache.get("cities");
-              cache.del("cities");
+              
                     if (cacheCities!==null) {
-                        console.log("cache hit");
                        return res.status(200).json(JSON.parse(cacheCities));
-                    } else {
-                        console.log("cache not found");
                     }
                    const cities = await Hotel.distinct("city");
                    try{

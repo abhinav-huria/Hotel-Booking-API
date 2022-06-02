@@ -2,8 +2,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 //ROUTES
 import auth from "./routes/auth.js";
@@ -23,6 +23,7 @@ var corsProperties = {
   credentials: true,
   origin: ["http://localhost:3000"],
 };
+const __dirname = path.resolve(path.dirname(''));
 
 //MIDDLEWARE
 app.use(express.json());
@@ -32,23 +33,9 @@ app.use(cors(corsProperties));
 
 //DB CONNECTION
 connectDB();
-// const connectDB = async () => {
-//   try {
-//     await mongoose.connect(process.env.MONGO_URL, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     });
-//     console.log("MongoDB Connected");
-//   } catch (err) {
-//     console.log(err);
-//     throw err;
-//   }
-// };
 
 //GET ROUTES
-app.get("/", (req, res) => {
-  res.send("Hello there");
-});
+app.use('/', express.static(path.join(__dirname, 'build')));
 
 //LOGIN ROUTE/MIDDLEWARE
 app.use("/api/v1/auth", auth);
@@ -64,6 +51,10 @@ app.use("/api/v1/booking", booking);
 
 //USERS ROUTE/MIDDLEWARE
 app.use("/api/v1/users", users);
+
+app.get("*", (req, res) => {
+  res.send("Hello there. Looks like something is missing.");
+});
 
 //SERVER START
 app.listen(3003, () => {

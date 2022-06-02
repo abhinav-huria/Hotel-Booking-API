@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 //CONNECTION URL
+// const url="redis://default:redispw@localhost:49153";
 const url=`redis://${process.env.REDIS_USER}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
 
 //REDIS CLIENT

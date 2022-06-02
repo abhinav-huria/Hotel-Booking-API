@@ -19,6 +19,5 @@ export const getBookingDates = function (startDate, endDate) {
     bookingDates.push(start.getTime());
     start = new Date(start.setDate(start.getDate() + 1));
   }
-  console.log(bookingDates);
   return bookingDates;
 };

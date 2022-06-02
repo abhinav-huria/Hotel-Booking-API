@@ -5,7 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "start -prod": "node server.js -prod"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "mongodb": "^4.6.0",
     "mongoose": "^6.3.3",
     "nodemon": "^2.0.16",
+    "pm2": "^5.2.0",
     "redis": "^4.1.0",
     "redis-cli": "^2.1.2",
     "util": "^0.12.4"

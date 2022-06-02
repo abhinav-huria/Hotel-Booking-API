@@ -6,11 +6,11 @@ export const verifyToken = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
     return res.status(401).json({
-      message: "No token, authorization denied",
+      message: "Please LogIn to continue",
     });
   }
   try {
-    console.log(token);
+   
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
@@ -37,9 +37,6 @@ export const verifyAdmin = (req, res, next) => {
 //USER VERIFICATION
 export const verifyUser = (req, res, next) => {
   verifyToken(req, res, () => {
-    console.log(req.user);
-    console.log(req.params);
-    console.log(req.user.id === req.params.userId)
     if (req.user.isAdmin || req.user.id === req.params.userId) {
       next();
     } else {

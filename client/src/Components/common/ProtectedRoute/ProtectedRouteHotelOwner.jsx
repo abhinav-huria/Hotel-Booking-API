@@ -5,9 +5,7 @@ function ProtectedRouteHotelOwner({ component: Component, ...restOfProps }) {
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   const isHotelOwner = localStorage.getItem("isHotelOwner");
 
-  
-
-  return isHotelOwner ? <Outlet /> : <Navigate to="/login" />;
+  return (isHotelOwner && isAuthenticated) ? <Outlet /> : <Navigate to="/login" />;
   
 }
 

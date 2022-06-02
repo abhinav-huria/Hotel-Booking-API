@@ -1,60 +1,57 @@
-.card{
-    min-height: 30vh;
-    height: auto;
-    max-height: 90vh;
-    margin-top: 5vh;
- padding: 5px 5px 5px 5px;
-
+.card {
+  min-height: 30vh;
+  height: auto;
+  max-height: 90vh;
+  margin-top: 5vh;
+  padding: 5px 5px 5px 5px;
 }
 
-.small-text{
-    font-size: 0.8em;
+.small-text {
+  font-size: 0.8em;
 }
 
-.container{
-    justify-content: center;
-    align-items: center;
+.container {
+  justify-content: center;
+  align-items: center;
 }
 
-.row{
-    height: auto;
+.row {
+  height: auto;
 }
 
-.round-border{
-    border-radius: 50%;
+.round-border {
+  border-radius: 50%;
 }
 
-
-.card-img{
-    /* margin: 25px 0 0 10px; */
-    width: auto;
-    height: auto;
+.card-img {
+  /* margin: 25px 0 0 10px; */
+  width: auto;
+  height: auto;
 }
 
-
-.white-bg{
-    background-color: white;
-    padding: 10px;
-    margin-top: 5vh;
-    height: auto;
-    border-radius: 10px;
+.white-bg {
+  background-color: white;
+  padding: 10px;
+  margin-top: 5vh;
+  height: auto;
+  border-radius: 10px;
 }
 
-.outer-box-1{
-    min-height: 92vh;
+.outer-box-1 {
+  min-height: 92vh;
 }
 
-.outer-box-2{
-    min-height: 87vh;
-    height: auto;
-    width: 75%;
-    margin: 0 auto 0 auto;
+.outer-box-2 {
+  min-height: 87vh;
+  height: auto;
+  width: 75%;
+  margin: 0 auto 0 auto;
 }
 
-.white-bg-1{
-    background-color: white;
-    padding: 20px;
-    margin-top: 5vh;
-    height: auto;
-    border-radius: 10px;
+.white-bg-1 {
+  background-color: white;
+  padding: 20px;
+  margin-top: 5vh;
+  height: auto;
+  border-radius: 10px;
 }

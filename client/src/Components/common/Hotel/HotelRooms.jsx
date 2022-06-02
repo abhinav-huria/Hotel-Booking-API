@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import beach from "../../assets/images/beach.png";
 import "./hotels.css";
+
 const HotelRooms = ({ rooms }) => {
-  const navigate = useNavigate();
   let link;
 
   return (
@@ -28,7 +27,6 @@ const HotelRooms = ({ rooms }) => {
                           className="card-img"
                           alt="room image"
                         />
-                        {/* <img src={room.photos[0]} alt="" /> */}
                       </div>
                       <div className="col-md-5">
                         <h5>{room.name}</h5>

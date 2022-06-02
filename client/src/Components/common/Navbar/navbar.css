@@ -1,26 +1,17 @@
-.myacc{
-    margin-right: 4vw;
-   
+.myacc {
+  margin-right: 4vw;
 }
 
-
-
-.nav-bg{
-    padding-left: 30px;
+.nav-bg {
+  padding-left: 30px;
 }
 
- .big-text{
-     text-decoration: none;
-    
-    /* font-weight: bold; */
+.big-text {
+  text-decoration: none;
+}
 
-
- }
-
-.btn1{
-    /* background-color: rgb(255, 182, 223); */
-    border: 2px solid rgb(119, 67, 107);
+.btn1 {
+  /* background-color: rgb(255, 182, 223); */
+  border: 2px solid rgb(119, 67, 107);
   border-radius: 5px;
-  
-
 }

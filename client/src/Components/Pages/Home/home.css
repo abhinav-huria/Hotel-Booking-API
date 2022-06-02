@@ -1,15 +1,14 @@
-*{
+* {
   border-radius: 0;
 }
 
 .search-container {
-display: flex;
-flex-direction: column;
-margin-left: auto;
-margin-right: auto;
-width: 100%;
-height: 92vh;
-
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 92vh;
 }
 
 .search-heading {
@@ -20,12 +19,16 @@ height: 92vh;
   font-size: 48px;
 }
 
-.sample-images{
-    padding: 10px;
-    display: flex;
-background-color: #FEF9EF;
-height: 500px;
+.sample-images {
+  padding: 10px;
+  display: flex;
+  background-color: #fef9ef;
+  height: 500px;
 
-justify-content: space-evenly;
+  justify-content: space-evenly;
 }
 
+.white-text {
+  color: white;
+  text-align: center;
+}

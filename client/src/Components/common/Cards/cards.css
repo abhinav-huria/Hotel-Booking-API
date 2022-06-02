@@ -1,0 +1,17 @@
+.booking-card {
+  width: 100%;
+
+  margin: 15px auto;
+  border-radius: 25px;
+}
+
+img {
+  width: auto;
+  max-height: 200px;
+  max-width: 100%;
+  border-radius: 15px;
+}
+
+.float-right {
+  float: right;
+}
