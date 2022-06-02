@@ -35,7 +35,10 @@ app.use(cors(corsProperties));
 connectDB();
 
 //GET ROUTES
-app.use('/', express.static(path.join(__dirname, 'build')));
+// app.use('/', express.static(path.join(__dirname, 'build')));
+app.get("/", (req, res) => {
+  res.send("Hello there.");
+});
 
 //LOGIN ROUTE/MIDDLEWARE
 app.use("/api/v1/auth", auth);
