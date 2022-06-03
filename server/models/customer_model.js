@@ -4,10 +4,12 @@ import { hash, genSalt } from "bcrypt";
 
 //VALIDATOR
 import { checkLength } from "../controllers/validation.js";
+import { generateUserId } from "../utilities/generateID.js";
 
 //SCHEMA
 const userSchema = new mongoose.Schema(
   {
+    _id:  { type: String },
     userName: {
       type: String,
       required: true,
@@ -49,11 +51,14 @@ userSchema.pre("save", async function (next) {
     const salt = await genSalt(10);
     const hashedPassword = await hash(this.userPassword, salt);
     this.userPassword = hashedPassword;
+    this._id = generateUserId();
     next();
   } catch (error) {
     next(error);
   }
 });
+
+
 
 //MODEL EXPORT
 export default mongoose.model("User", userSchema);

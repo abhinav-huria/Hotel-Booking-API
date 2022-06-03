@@ -5,8 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "start -prod": "node server.js -prod"
+    "start": "nodemon server.js",
+    "start -prod": "node server.js :prod"
   },
   "author": "",
   "license": "ISC",
@@ -20,10 +20,12 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.6.0",
     "mongoose": "^6.3.3",
+    "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
     "pm2": "^5.2.0",
     "redis": "^4.1.0",
     "redis-cli": "^2.1.2",
     "util": "^0.12.4"
-  }
+  },
+  "proxy": "http://localhost:3003"
 }

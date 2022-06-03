@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 
 import Home from "./Components/Pages/Home/Home";
 import Login from "./Components/Pages/SignIn/Login.js";
@@ -25,41 +25,42 @@ function App() {
       <div className="common-container">
         <NavbarComponent />
         <Routes>
-          <Route  path="/" element={<Home />} />
-          <Route  path="/signup" element={<Register />} />
-          <Route  path="/login" element={<Login />} />
-          <Route  path="/hotels" element={<Hotels />} />
-          <Route  path="/viewhotel" element={<Hotel />} />
-          <Route  path="/bookRoom" element={<Book />} />
-          <Route  path="/booking/:id" element={<ProtectedRoute />}>
-            <Route  path="/booking/:id" element={<Booking />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/signup" element={<Register />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/hotels" element={<Hotels />} />
+          <Route exact path="/viewhotel" element={<Hotel />} />
+          <Route exact path="/bookRoom" element={<Book />} />
+          <Route exact path="/booking/:id" element={<ProtectedRoute />}>
+            <Route exact path="/booking/:id" element={<Booking />} />
           </Route>
-          <Route  path="/mybookings" element={<ProtectedRoute />}>
-            <Route  path="/mybookings" element={<MyBookings />} />
+          <Route exact path="/mybookings" element={<ProtectedRoute/>}>
+            <Route exact path="/mybookings" element={<MyBookings />} />
           </Route>
-          <Route  path="/dashboard" element={<ProtectedRouteAdmin />}>
-            <Route  path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/dashboard" element={<ProtectedRouteAdmin />}>
+            <Route exact path="/dashboard" element={<Dashboard />} />
           </Route>
           <Route
-            
+            exact
             path="/hotelconsole"
             element={<ProtectedRouteHotelOwner />}
           >
-            <Route  path="/hotelconsole" element={<Dashboard />} />
+            <Route exact path="/hotelconsole" element={<Dashboard />} />
           </Route>
-          <Route  path="/addhotel" element={<ProtectedRouteHotelOwner />}>
-            <Route  path="/addhotel" element={<AddHotels />} />
+          <Route exact path="/addhotel" element={<ProtectedRouteHotelOwner />}>
+            <Route exact path="/addhotel" element={<AddHotels />} />
           </Route>
           <Route
             
             path="/addroom/:hotelId"
             element={<ProtectedRouteHotelOwner />}
           >
-            <Route  path="/addroom/:hotelId" element={<AddRoom />} />
+            <Route exact path="/addroom/:hotelId" element={<AddRoom />} />
           </Route>
-          <Route  path="/help" element={<ProtectedRoute />}>
-            <Route  path="/help" element={<Help />} />
+          <Route exact path="/help" element={<ProtectedRoute/>}>
+            <Route exact path="/help" element={<Help />} />
           </Route>
+          
         </Routes>
       </div>
     </>

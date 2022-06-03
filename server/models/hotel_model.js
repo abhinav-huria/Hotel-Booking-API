@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 
 //VALIDATOR
 import { checkLength } from "../controllers/validation.js";
-
+import { generateHotelId } from "../utilities/generateID.js";
 //SCHEMA
 const HotelSchema = new mongoose.Schema({
+  _id: { type: String },
   name: {
     type: String,
     required: true,
@@ -52,6 +53,16 @@ email: {
   },
  
 });
+
+HotelSchema.pre("save", async function (next) {
+  try {
+    this._id = generateHotelId();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 //MODEL EXPORT
 export default mongoose.model("Hotel", HotelSchema);

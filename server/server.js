@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
-
 //ROUTES
 import auth from "./routes/auth.js";
 import hotels from "./routes/hotels.js";
@@ -15,7 +14,6 @@ import users from "./routes/users.js";
 //UTILITIES
 import "./utilities/redis.js";
 import connectDB from "./utilities/dbConnection.js";
-
 //APP
 const app = express();
 dotenv.config();
@@ -23,8 +21,9 @@ var corsProperties = {
   credentials: true,
   origin: ["http://localhost:3000"],
 };
-const __dirname = path.resolve(path.dirname(''));
 
+const __dirname = path.resolve(path.dirname(''));
+// console.log(__dirname+"_");
 //MIDDLEWARE
 app.use(express.json());
 app.use(cookieParser());
@@ -35,10 +34,8 @@ app.use(cors(corsProperties));
 connectDB();
 
 //GET ROUTES
-// app.use('/', express.static(path.join(__dirname, 'build')));
-app.get("/", (req, res) => {
-  res.send("Hello there.");
-});
+
+app.use(express.static(path.join(__dirname, "build")));
 
 //LOGIN ROUTE/MIDDLEWARE
 app.use("/api/v1/auth", auth);
@@ -55,12 +52,12 @@ app.use("/api/v1/booking", booking);
 //USERS ROUTE/MIDDLEWARE
 app.use("/api/v1/users", users);
 
-app.get("*", (req, res) => {
-  res.send("Hello there. Looks like something is missing.");
-});
+app.get("*", (req, res) =>
+  res.sendFile(path.resolve(__dirname, "build", "index.html"))
+);
 
 //SERVER START
-app.listen(3003, () => {
+app.listen(PORT, () => {
   connectDB();
-  console.log(`Listening at http://localhost:3003`);
+  console.log(`Listening at http://localhost:${PORT}`);
 });

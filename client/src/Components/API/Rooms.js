@@ -3,7 +3,7 @@ import axios from "axios";
 export const addRoom = async (room, hotelId) => {
   try {
     const result = await axios.post(
-      `http://localhost:3003/api/v1/rooms/addRoom/${hotelId}`,
+      `/api/v1/rooms/addRoom/${hotelId}`,
       room,
       { withCredentials: true }
     );
@@ -16,7 +16,7 @@ export const addRoom = async (room, hotelId) => {
 export const getRoomsByHotel = async (hotelId, start,end) => {
   try {
     const result = await axios.get(
-      `http://localhost:3003/api/v1/rooms/getRooms/${hotelId}?start=${start}&end=${end}`
+      `/api/v1/rooms/getRooms/${hotelId}?start=${start}&end=${end}`
     );
     return result;
   } catch (error) {
@@ -27,7 +27,7 @@ export const getRoomsByHotel = async (hotelId, start,end) => {
 export const getRoom = async (roomId) => {
   try {
     const result = await axios.get(
-      `http://localhost:3003/api/v1/rooms/getRoom/${roomId}`
+      `/api/v1/rooms/getRoom/${roomId}`
     );
     return result;
   } catch (error) {
@@ -38,7 +38,7 @@ export const getRoom = async (roomId) => {
 export const updateRoom = async (room, id) => {
   try {
     const result = await axios.put(
-      `http://localhost:3003/api/v1/rooms/updateRoom/${id}`,
+      `/api/v1/rooms/updateRoom/${id}`,
       room
     );
     return result;
@@ -50,7 +50,7 @@ export const updateRoom = async (room, id) => {
 export const deleteRoom = async (roomId) => {
   try {
     const result = await axios.delete(
-      "http://localhost:3003/api/v1/deleteRoom/" + roomId
+      "/api/v1/deleteRoom/" + roomId
     );
     return result;
   } catch (error) {
@@ -61,7 +61,7 @@ export const deleteRoom = async (roomId) => {
 export const roomAvailability = async (roomId) => {
   try {
     const result = await axios.put(
-      `http://localhost:3003/api/v1/rooms/roomAvailability/${roomId}`
+      `/api/v1/rooms/roomAvailability/${roomId}`
     );
     return result;
   } catch (error) {

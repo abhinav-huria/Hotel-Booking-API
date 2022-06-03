@@ -1,9 +1,12 @@
 //DEPENDENCIES
 import mongoose from "mongoose";
 
+import { generateRoomId } from "../utilities/generateID.js";
+
 //SCHEMA
 const RoomSchema = new mongoose.Schema(
   {
+    _id: { type: String },
     name: {
       type: String,
       required: true,
@@ -49,6 +52,17 @@ const RoomSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+
+RoomSchema.pre("save", async function (next) {
+  try {
+    this._id = generateRoomId();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 //MODEL EXPORT
 export default mongoose.model("Room", RoomSchema);

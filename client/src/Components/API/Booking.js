@@ -3,7 +3,7 @@ import axios from "axios";
 export const bookRoom = async (userId, roomId, data) => {
   try {
     const res = await axios.post(
-      `http://localhost:3003/api/v1/booking/book/${userId}/${roomId}`,
+      `/api/v1/booking/book/${userId}/${roomId}`,
       data,
       { withCredentials: true },
       {
@@ -22,7 +22,7 @@ export const bookRoom = async (userId, roomId, data) => {
 export const getBooking = async (bookingId) => {
     try {
         const res = await axios.get(
-        `http://localhost:3003/api/v1/booking/${bookingId}`
+        `/api/v1/booking/${bookingId}`
         );
         return res.data;
     } catch (err) {
@@ -33,7 +33,7 @@ export const getBooking = async (bookingId) => {
     export const deleteBooking = async (bookingId) => {
         try {
             const res = await axios.delete(
-            `http://localhost:3003/api/v1/booking/${bookingId}`
+            `/api/v1/booking/${bookingId}`
             );
             return res.data;
         } catch (err) {
@@ -44,7 +44,7 @@ export const getBooking = async (bookingId) => {
         export const getUserBookings = async (userId) => {
             try {
                 const res = await axios.get(
-                `http://localhost:3003/api/v1/booking/mybookings/${userId}`,
+                `/api/v1/booking/mybookings/${userId}`,
                 { withCredentials: true }
                 );
                 return res.data;

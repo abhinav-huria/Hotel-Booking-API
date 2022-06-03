@@ -73,8 +73,6 @@ const Book = () => {
     else {
       bookRoom(user, room._id, booking)
         .then((res) => {
-         
-
           navigate(`/booking/${res._id}`);
         })
         .catch((err) => {
@@ -90,6 +88,7 @@ const Book = () => {
 
         <div className="row">
           <h4 className="white-text">Confirm your booking</h4>
+          <p className="white-text">Bookings once made cannot be cancelled.</p>
         </div>
         <div className="booking-conf-div">
           <div className="row">

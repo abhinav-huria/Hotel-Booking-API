@@ -3,7 +3,7 @@ import axios from "axios";
 export const signUp = async (user) => {
   try {
     const result = await axios.post(
-      "http://localhost:3003/api/v1/auth/signup",
+      "/api/v1/auth/signup",
       user
     );
     return result;
@@ -15,7 +15,7 @@ export const signUp = async (user) => {
 export const signIn = async (user) => {
   try {
     const result = await axios.post(
-      "http://localhost:3003/api/v1/auth/signin",
+      "/api/v1/auth/signin",
       user,
       { withCredentials: true }
     );
@@ -28,7 +28,7 @@ export const signIn = async (user) => {
 export const signOut = async () => {
   try {
     const result = await axios.get(
-      "http://localhost:3003/api/v1/auth/signout",
+      "/api/v1/auth/signout",
       { withCredentials: true }
     );
     return result;

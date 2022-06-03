@@ -5,6 +5,7 @@ import Room from "../models/room_model.js";
 
 //VALIDATION IMPORT(S)
 import { getBookingDates } from "./validation.js";
+import { sendBookingConfirmation } from "../utilities/mail.js";
 
 //CONTROLLER FUNCTION(S)
 export const getBookings = async (req, res) => {
@@ -63,6 +64,7 @@ export const bookRoom = async (req, res) => {
           message: "Error in booking room",
         });
       }
+      sendBookingConfirmation(user.userEmail, booking);
       return res.status(200).json(booking);
     } else {
       for (let i = 0; i < room.roomsAvailable.length; i++) {
@@ -95,6 +97,7 @@ export const bookRoom = async (req, res) => {
                 },
               }
             );
+            sendBookingConfirmation(user.userEmail, booking);
             return res.status(200).json(booking);
            
           } catch (err) {

@@ -67,7 +67,7 @@ const SearchComponent = () => {
             <option value="def" key={-1}>
               City
             </option>
-            {cities.map((city) => (
+            {cities?.map((city) => (
               <option value={city} key={city}>
                 {city}
               </option>

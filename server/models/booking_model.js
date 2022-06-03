@@ -1,8 +1,11 @@
 //DEPENDENCIES
 import mongoose from "mongoose";
 
+import { generateBookingId } from "../utilities/generateID.js";
+
 //SCHEMA
 const bookingSchema = new mongoose.Schema({
+  _id: { type: String },
   endAt: {
     type: Date,
     required: true,
@@ -23,6 +26,17 @@ const bookingSchema = new mongoose.Schema({
   userId: String,
   hotelId: String,
 });
+
+bookingSchema.pre("save", async function (next) {
+  try {
+    this._id = generateBookingId();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 //MODEL EXPORT
 export default mongoose.model("Booking", bookingSchema);

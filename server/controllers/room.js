@@ -29,7 +29,7 @@ export const getRoomsByHotel = async (req, res) => {
      const bookingDates=getBookingDates(start,end);
     const rooms = await Room.find({ hotelId: req.params.hotelId });
 let avail=[];
-    const available = rooms.filter((room) => {
+    rooms.filter((room) => {
       if(room.numberOfRooms> room.roomsAvailable.length){
        avail.push(room);
       }
@@ -41,12 +41,13 @@ let avail=[];
             )
           ) {
             avail.push(room);
+            break;
           }}
       }
    }
     );
       
-    res.status(200).json(available);
+    res.status(200).json(avail);
  
   } catch (error) {
     res.status(500).json(error);
