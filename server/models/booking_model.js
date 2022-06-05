@@ -14,17 +14,27 @@ const bookingSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  totalPrice: Number,
+  totalPrice: {
+    type: Number,
+    required: true,
+  },
   roomId: {
     type: String,
+    required: true,
   },
   guests: Number,
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  userId: String,
-  hotelId: String,
+  userId:{
+    type: String,
+    required: true,
+  },
+  hotelId: {
+    type: String,
+    required: true,
+  },
 });
 
 bookingSchema.pre("save", async function (next) {

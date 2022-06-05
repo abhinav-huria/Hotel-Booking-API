@@ -1,6 +1,8 @@
 //DEPENDENCIES
 import mongoose from "mongoose";
 
+import { generateDisputeId } from "../utilities/generateID.js";
+
 const DisputeSchema = new mongoose.Schema({
     userId: {
         type: String,
@@ -21,8 +23,21 @@ const DisputeSchema = new mongoose.Schema({
     message: {
         type: String,
         required: true,
+    },
+    solved:{
+        type: Boolean,
+        required: false,
+        default: false
     }
 });
 
+DisputeSchema.pre("save", function (next) {
+    try{
+   this._id = generateDisputeId();
+    next();
+    }catch(error){
+        next(error);
+    }
+});
 
 export default mongoose.model("Dispute", DisputeSchema);

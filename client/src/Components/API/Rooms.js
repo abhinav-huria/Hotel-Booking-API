@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const addRoom = async (room, hotelId) => {
+export const addRoom = async (room) => {
   try {
     const result = await axios.post(
-      `/api/v1/rooms/addRoom/${hotelId}`,
+      `/api/v1/rooms/hotel/addRoom`,
       room,
       { withCredentials: true }
     );
@@ -51,17 +51,6 @@ export const deleteRoom = async (roomId) => {
   try {
     const result = await axios.delete(
       "/api/v1/deleteRoom/" + roomId
-    );
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-
-export const roomAvailability = async (roomId) => {
-  try {
-    const result = await axios.put(
-      `/api/v1/rooms/roomAvailability/${roomId}`
     );
     return result;
   } catch (error) {

@@ -3,25 +3,9 @@ import "./dashboard.css";
 const Dashboard = () => {
   const options = [
     {
-      title: "Change Password",
-      link: "/changepassword",
-    },
-    {
       title: "Add Hotel",
       link: "/addhotel",
-    },
-    {
-      title: "View Bookings",
-      link: "/viewbookings",
-    },
-    {
-      title: "View Users",
-      link: "/viewusers",
-    },
-    {
-      title: "View/Edit hotels",
-      link: "/modifyhotels",
-    },
+    }
   ];
 
   return (

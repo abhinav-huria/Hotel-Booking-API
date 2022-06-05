@@ -7,7 +7,7 @@ import { getRoom } from "../../API/Rooms";
 
 const Booking = () => {
   const location = useLocation();
-
+const userID= localStorage.getItem("user");
   const [hotel, setHotel] = useState({});
   const [room, setRoom] = useState({});
   const [start, setStart] = useState("");
@@ -18,7 +18,7 @@ const Booking = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await getBooking(id);
+      const response = await getBooking(userID,id);
       setBooking(response);
       setStart(response.startAt.split("T")[0]);
       setEnd(response.endAt.split("T")[0]);
@@ -66,7 +66,7 @@ const Booking = () => {
                 <a href="/mybookings">my bookings</a> section
               </li>
               <li>
-                We are not liable for any discrepamcies/losses you may
+                We are not liable for any discrepancies/losses you may
                 experience during your stay
               </li>
             </ul>

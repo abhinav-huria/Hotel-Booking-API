@@ -36,3 +36,16 @@ export function sendBookingConfirmation(to, booking) {
 
   sendMail(mailDetails);
 }
+
+export function sendDisputeSubmission( dispute) {
+   const {email, subject}= dispute;
+    const disputeMailDetails = {
+    from: process.env.NODEMAILER_EMAIL,
+    to: email,
+    subject: "Dispute Submitted Successfully",
+    html: `<p>Hi,<br><br> Your dispute with the subject "${subject}" has been submitted. <br> We will get back to you soon. <br><br>For more info please visit my bookings section on our website.</p>`,
+  };
+
+  sendMail(disputeMailDetails);
+}
+

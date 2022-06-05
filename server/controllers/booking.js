@@ -11,6 +11,9 @@ import { sendBookingConfirmation } from "../utilities/mail.js";
 export const getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find({});
+    if (bookings.length === 0) {
+      return res.status(404).json({ message: "No bookings found" });
+    }
     res.status(200).json(bookings);
   } catch (error) {
     res.status(500).json(error);
@@ -20,6 +23,9 @@ export const getBookings = async (req, res) => {
 export const getBooking = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.bookingId);
+    if (!booking) {
+      return res.status(404).json({ message: "The booking doesn't exist" });
+    }
     res.status(200).json(booking);
   } catch (error) {
     res.status(500).json(error);
@@ -32,7 +38,7 @@ export const bookRoom = async (req, res) => {
 
   try {
     const { startAt, endAt, roomId, userId } = req.body;
- 
+
     const room = await Room.findById(roomId);
     const user = await User.findById(userId);
     if (!room) {
@@ -69,11 +75,10 @@ export const bookRoom = async (req, res) => {
     } else {
       for (let i = 0; i < room.roomsAvailable.length; i++) {
         if (
-          bookingDates.some((date) =>
-            !room.roomsAvailable[i].datesBooked.includes(date)
+          bookingDates.some(
+            (date) => !room.roomsAvailable[i].datesBooked.includes(date)
           )
         ) {
-         
           let bookedRoomDates = room.roomsAvailable[i].datesBooked;
           for (let k = 0; k < bookingDates.length; k++) {
             bookedRoomDates.push(bookingDates[k]);
@@ -93,20 +98,17 @@ export const bookRoom = async (req, res) => {
               {
                 $set: {
                   [index1]: bookedRoomDates,
-                
                 },
               }
             );
             sendBookingConfirmation(user.userEmail, booking);
             return res.status(200).json(booking);
-           
           } catch (err) {
             return res.status(500).json({
               message: "Error in booking room",
             });
           }
-        }
-        else{
+        } else {
           console.log(i);
         }
       }
@@ -121,15 +123,19 @@ export const bookRoom = async (req, res) => {
 
 export const deleteBooking = async (req, res) => {
   try {
-    await Booking.findByIdAndDelete(req.params.bookingId);
+    const deletedBooking = await Booking.findByIdAndDelete(
+      req.params.bookingId
+    );
+    if (!deletedBooking) {
+      return res.status(404).json({ message: "The booking doesn't exist" });
+    }
     try {
       await User.findByIdAndUpdate(req.params.userId, {
         $pull: { userBookings: req.params.bookingId },
       });
-   
     } catch (err) {
       return res.status(500).json({
-        message: "Error in booking room",
+        message: "Error in deleting booking",
       });
     }
     res.status(200).json({

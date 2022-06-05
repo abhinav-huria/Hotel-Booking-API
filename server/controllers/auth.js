@@ -34,10 +34,7 @@ export const signIn = async (req, res) => {
       { id: user._id, isAdmin: user.isAdmin, isHotelOwner: user.isHotelOwner },
       process.env.JWT_SECRET
     );
-    res
-      .cookie("token", token)
-      .status(200)
-      .json({ user: user._id, token: token });
+    res.cookie("token", token).status(200).json({ user: user._id });
   } catch (error) {
     res.status(500).json(error);
   }

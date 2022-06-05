@@ -48,7 +48,7 @@ const Book = () => {
   };
 
   const totalPrice = () => {
-    totalprice = days() * room.pricePerNight;
+    totalprice = (days() -1) * room.pricePerNight;
   };
 
   totalPrice();

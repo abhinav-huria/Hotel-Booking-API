@@ -39,7 +39,7 @@ const AddRoom = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addRoom(room, hotelId)
+    addRoom(room)
       .then((res) => {
         setStatus("success");
       })

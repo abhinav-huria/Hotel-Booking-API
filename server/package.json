@@ -25,6 +25,8 @@
     "pm2": "^5.2.0",
     "redis": "^4.1.0",
     "redis-cli": "^2.1.2",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.4.0",
     "util": "^0.12.4"
   },
   "proxy": "http://localhost:3003"

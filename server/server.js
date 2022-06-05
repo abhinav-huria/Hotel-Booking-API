@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+// import { SwaggerUiOptions } from "swagger-ui-express";
 //ROUTES
 import auth from "./routes/auth.js";
 import hotels from "./routes/hotels.js";
@@ -17,25 +20,72 @@ import connectDB from "./utilities/dbConnection.js";
 //APP
 const app = express();
 dotenv.config();
-var corsProperties = {
-  credentials: true,
-  origin: ["http://localhost:3000"],
-};
+
 
 const __dirname = path.resolve(path.dirname(''));
 // console.log(__dirname+"_");
 //MIDDLEWARE
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors(corsProperties));
-//  app.use(cors());
-
+ app.use(cors());
+const PORT = process.env.PORT || 5000;
 //DB CONNECTION
 connectDB();
+
+const options = {
+  definition : {
+    openapi: "3.0.0",
+  info: {
+    title: "Hotel Booking API",
+    version: "1.0.0",
+    description: "API for Hotel Booking",
+  },
+  servers: [
+    {
+      url:"https://otelapp.herokuapp.com",
+      description: "Heroku Server"
+    },
+    {
+      url: "http://localhost:5000",
+      description: "Local Server"
+    }
+   
+  ],
+  // components: {
+  //   securitySchemes: {
+  //     bearerAuth: {
+  //       type: "http",
+  //       scheme: "bearer",
+  //       bearerFormat: "JWT",
+  //     },
+  //   },
+  // },
+  // security: [
+  //   {
+  //     bearerAuth: [],
+  //   },
+  // ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+const specs = swaggerJSDoc(options);
+
 
 //GET ROUTES
 
 app.use(express.static(path.join(__dirname, "build")));
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs, {
+  explorer: true,
+  swaggerOptions: {
+    docExpansion: "list",
+    filter: true,
+    showRequestDuration: true,
+    showExtensions: true,
+    defaultModelRendering: "schema"
+  },
+} ));
 
 //LOGIN ROUTE/MIDDLEWARE
 app.use("/api/v1/auth", auth);

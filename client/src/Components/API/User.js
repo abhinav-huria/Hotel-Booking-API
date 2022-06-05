@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getUsers = async () => {
   try {
-    const result = await axios.get("/api/v1/users/");
+    const result = await axios.get("/api/v1/users/c", { withCredentials: true });
     return result;
   } catch (error) {
     return error;
@@ -20,7 +20,7 @@ export const getUser = async (userId) => {
 
     export const updateUser = async (user, id) => {
         try {
-            const result = await axios.put(`/api/v1/users/updateUser/${id}`, user);
+            const result = await axios.put(`/api/v1/users/update/${id}`, user);
             return result;
         } catch (error) {
             return error;

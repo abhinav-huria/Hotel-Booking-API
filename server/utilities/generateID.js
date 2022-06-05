@@ -2,6 +2,7 @@ let hotels=1;
 let rooms=1;
 let bookings=1;
 let users=1;
+let disputes=1;
 
 export function generateHotelId ()  {
     hotels++;
@@ -20,3 +21,6 @@ export function generateUserId  () {
     return 'U' + Math.floor(Math.random() * 1000000);
     }
 
+export function generateDisputeId () {
+    return 'D' + Math.floor(Math.random() * 1000000);
+    }

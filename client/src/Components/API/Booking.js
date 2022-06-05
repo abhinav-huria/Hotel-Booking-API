@@ -19,10 +19,10 @@ export const bookRoom = async (userId, roomId, data) => {
   }
 };
 
-export const getBooking = async (bookingId) => {
+export const getBooking = async (userId,bookingId) => {
     try {
         const res = await axios.get(
-        `/api/v1/booking/${bookingId}`
+        `/api/v1/booking/${userId}/${bookingId}`
         );
         return res.data;
     } catch (err) {
@@ -33,7 +33,7 @@ export const getBooking = async (bookingId) => {
     export const deleteBooking = async (bookingId) => {
         try {
             const res = await axios.delete(
-            `/api/v1/booking/${bookingId}`
+            `/api/v1/booking/delete/${bookingId}`
             );
             return res.data;
         } catch (err) {
@@ -44,7 +44,7 @@ export const getBooking = async (bookingId) => {
         export const getUserBookings = async (userId) => {
             try {
                 const res = await axios.get(
-                `/api/v1/booking/mybookings/${userId}`,
+                `/api/v1/booking/mybookings/u/${userId}`,
                 { withCredentials: true }
                 );
                 return res.data;
