@@ -32,10 +32,19 @@ export const signIn = async (req, res) => {
     }
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin, isHotelOwner: user.isHotelOwner },
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,
+      { expiresIn: '6h' }
     );
     res.cookie("token", token).status(200).json({ user: user._id });
   } catch (error) {
     res.status(500).json(error);
   }
 };
+
+export const logout = (req, res) => {
+  try{
+  res.clearCookie("token").status(200).json({ message: "Logged out" });
+  }catch(error){
+      res.status(500).json(error);
+  }
+}

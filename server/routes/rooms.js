@@ -81,7 +81,7 @@ const router = express.Router();
   * @swagger
   * tags:
   *   name: Rooms
-  *   description: The room managing API
+  *   description: Room management routes
   */
 
 //GET ALL ROOMS(ADMIN ONLY)
@@ -100,6 +100,8 @@ const router = express.Router();
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Room'
+ *       401:
+ *         description: Unauthorized or signed out
  *       404:
  *         description: No rooms were found
  *       500:
@@ -207,11 +209,13 @@ const router = express.Router();
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Room'
+ *       401:
+ *        description: Unauthorized or signed out
  *       500:
  *        description: Internal server error
  */
 
-router.post("/hotel/addRoom", verifyAdmin, addRoom);
+router.post("/hotel/addRoom", verifyHotelOwner, addRoom);
 
 
 //UPDATE/DELETE ROOM(ADMIN ONLY)
@@ -242,6 +246,8 @@ router.post("/hotel/addRoom", verifyAdmin, addRoom);
  *           application/json:
  *             schema:
  *                $ref: '#/components/schemas/Room'
+ *      401:
+ *        description: Unauthorized or signed out
  *      404:
  *        description: The room was not found
  *      500:
@@ -270,6 +276,8 @@ router.put("/updateRoom/:id", verifyHotelOwner, updateRoom);
  *     responses:
  *       200:
  *        description: Successfully deleted hotel
+ *       401:
+ *         description: Unauthorized or signed out
  *       404:
  *        description: Something is missing
  *       500:
@@ -277,7 +285,7 @@ router.put("/updateRoom/:id", verifyHotelOwner, updateRoom);
  */
 
 
-router.delete("/deleteRoom/:roomId", verifyHotelOwner, deleteRoom);
+router.delete("/deleteRoom/:roomId", verifyAdmin, deleteRoom);
 
 
 export default router;

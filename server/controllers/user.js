@@ -72,7 +72,7 @@ export const getDisputes = async (req, res, next) => {
 export const markDisputeSolved = async (req, res, next) => {
   try {
     const updatedDispute = await Dispute.findByIdAndUpdate(
-      req.params.id,
+      req.params.disputeId,
       { $set: { solved: true } },
       { new: true }
     );

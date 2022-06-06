@@ -2,7 +2,7 @@
 import express from "express";
 
 //CONTROLLER(S)
-import { signUp, signIn } from "../controllers/auth.js";
+import { signUp, signIn,logout } from "../controllers/auth.js";
 
 //ROUTER
 const router = express.Router();
@@ -77,7 +77,7 @@ const router = express.Router();
   * @swagger
   * tags:
   *   name: Auth
-  *   description: The auth managing API
+  *   description: Authentication routes
   */
 
 //ROUTES
@@ -135,6 +135,22 @@ router.post("/signup", signUp);
 */
 
 router.post("/signin", signIn);
+
+/**
+ * @swagger
+ * /api/v1/auth/logout:
+ *   post:
+ *    summary: Logout
+ *    description: This route is used to logout a user. The route will delete the JWT token (as cookie) which can be used to authenticate the user.
+ *    tags: [Auth]
+ *    responses:
+ *     200:
+ *      description: The user has been logged out
+ *     500:
+ *      description: Internal server error
+ */
+
+router.post("/logout",logout);
 
 //EXPORT
 export default router;

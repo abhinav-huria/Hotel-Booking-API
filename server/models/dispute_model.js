@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { generateDisputeId } from "../utilities/generateID.js";
 
 const DisputeSchema = new mongoose.Schema({
+    _id: { type: String },
     userId: {
         type: String,
         required: false,

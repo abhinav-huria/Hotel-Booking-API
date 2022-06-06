@@ -78,7 +78,7 @@ const router = express.Router();
   * @swagger
   * tags:
   *   name: Hotels
-  *   description: The hotel managing API
+  *   description: Hotel management routes
   */
 
 
@@ -87,7 +87,7 @@ const router = express.Router();
  * /api/v1/hotels:
  *   get:
  *     summary: Get all hotels
- *     description: This route returns all hotels in the database. It can only be accessed by admin.
+ *     description: This route returns all hotels in the database. 
  *     tags: [Hotels]
  *     responses:
  *       200:
@@ -102,7 +102,7 @@ const router = express.Router();
  *         description: Internal server error
  *    
  */
-router.get("/", verifyAdmin, getHotels);
+router.get("/", getHotels);
 
 
 /**
@@ -140,8 +140,8 @@ router.get("/", verifyAdmin, getHotels);
  * @swagger
  * /api/v1/hotels/availableCities/c:
  *   get:
- *     summary: Get all available cities
- *     description: This route returns all the cities that the hotels are available in. It is publicly accessible.
+ *     summary: Get all <b>cached</b> available cities
+ *     description: This route returns all the cities that the hotels are available in. The data is <b>cached</b> using Redis cloud. If cache is empty, it will be populated from the database. The cache is deleted if any hotel is added.
  *     tags: [Hotels]
  *     responses:
  *       200:
@@ -221,7 +221,7 @@ router.get("/city/:city", getHotelByCity);
  * /api/v1/hotels/addHotel:
  *  post:
  *     summary: Add a hotel
- *     description: This route adds a hotel to the database. It can only be accessed by admin.<br> It requires a JSON body with the following fields- name, city, address, phoneNumber, email, rating, description, amenities, rooms.
+ *     description: This route adds a hotel to the database. It can only be accessed by admin.<br> It requires a JSON body with the following fields- name, city, address, phoneNumber, email, rating, description, amenities, rooms. <br> Whenever a hotel is successfully added, the <b>cache is deleted</b>.
  *     tags: [Hotels]
  *     requestBody:
  *       required: true
@@ -236,11 +236,13 @@ router.get("/city/:city", getHotelByCity);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Hotel'
+ *       401:
+ *         description: Unauthorized or signed out
  *       500:
  *        description: Internal server error
  */
 
-router.post("/addhotel",verifyAdmin, addHotel);
+router.post("/addhotel",verifyHotelOwner, addHotel);
 
 /**
  * @swagger
@@ -269,6 +271,8 @@ router.post("/addhotel",verifyAdmin, addHotel);
  *           application/json:
  *             schema:
  *                $ref: '#/components/schemas/Hotel'
+ *      401:
+ *         description: Unauthorized or signed out
  *      404:
  *        description: The hotel was not found
  *      500:
@@ -282,7 +286,7 @@ router.put("/update/:id", verifyAdmin, updateHotel);
  * /api/v1/hotels/delete/{id}:
  *   delete:
  *     summary: Delete a hotel
- *     description: This route deletes a hotel from the database. It takes the hotelId as a parameter. It can only be accessed by admin.
+ *     description: This route deletes a hotel from the database. It takes the hotelId as a parameter. It can only be accessed by admin. It does not delete any room associated with the hotel.
  *     tags: [Hotels]
  *     parameters:
  *        - in: path
@@ -295,6 +299,8 @@ router.put("/update/:id", verifyAdmin, updateHotel);
  *     responses:
  *       200:
  *        description: Successfully deleted hotel
+ *       401:
+ *         description: Unauthorized or signed out
  *       404:
  *        description: The hotel was not found
  *       500:

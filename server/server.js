@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-// import { SwaggerUiOptions } from "swagger-ui-express";
+
 //ROUTES
 import auth from "./routes/auth.js";
 import hotels from "./routes/hotels.js";
@@ -23,7 +23,7 @@ dotenv.config();
 
 
 const __dirname = path.resolve(path.dirname(''));
-// console.log(__dirname+"_");
+
 //MIDDLEWARE
 app.use(express.json());
 app.use(cookieParser());
@@ -38,7 +38,7 @@ const options = {
   info: {
     title: "Hotel Booking API",
     version: "1.0.0",
-    description: "API for Hotel Booking",
+    description: "API for Hotel Booking Application. This API is used to book hotels, view hotel details, view rooms available, view booking history of a user and User/Hotel/Room/Booking CRUD operations. Developed by: Abhinav Huria",
   },
   servers: [
     {
@@ -76,7 +76,7 @@ const specs = swaggerJSDoc(options);
 
 app.use(express.static(path.join(__dirname, "build")));
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs, {
+app.use("/v1/api-docs", swaggerUi.serve, swaggerUi.setup(specs, {
   explorer: true,
   swaggerOptions: {
     docExpansion: "list",

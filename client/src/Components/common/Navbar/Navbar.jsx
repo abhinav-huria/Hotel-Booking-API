@@ -53,7 +53,7 @@ else{
       variant="light"
     >
       <Navbar.Brand href="/">Ôtel</Navbar.Brand>
-      <Navbar.Brand href="/api-docs">API DOCS</Navbar.Brand>
+      <Navbar.Brand href="/v1/api-docs">API DOCS</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">

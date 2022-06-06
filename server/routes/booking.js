@@ -63,7 +63,7 @@ const router = express.Router();
   * @swagger
   * tags:
   *   name: Booking
-  *   description: The booking managing API
+  *   description: Booking management routes
   */
 
 
@@ -96,6 +96,8 @@ const router = express.Router();
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Booking'
+ *       401:
+ *         description: Unauthorized or signed out
  *       404:
  *         description: The booking was not found
  *       500:
@@ -120,6 +122,8 @@ router.get("/:userID/:bookingId",verifyUser, getBooking);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Booking'
+ *       401:
+ *         description: Unauthorized or signed out
  *       404:
  *         description: No bookings were found
  *       500:
@@ -153,6 +157,8 @@ router.get("/allBookings",verifyAdmin, getBookings);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Booking'
+ *       401:
+ *         description: Unauthorized or signed out
  *       404:
  *         description: No bookings were found
  *       500:
@@ -200,6 +206,8 @@ router.get("/mybookings/u/:userId",verifyUser, getUserBookings);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Booking'
+ *       401:
+ *         description: Unauthorized or signed out
  *       404:
  *         description: Something is missing or the room is unavailable
  *       500:
@@ -230,6 +238,8 @@ router.post("/book/:userId/:roomId",verifyUser, bookRoom);
  *     responses:
  *       200:
  *        description: Successfully deleted hotel
+ *       401:
+ *         description: Unauthorized or signed out
  *       404:
  *        description: Something is missing
  *       500:
